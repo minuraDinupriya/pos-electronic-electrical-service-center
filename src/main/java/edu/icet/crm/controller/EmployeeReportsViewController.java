@@ -10,7 +10,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class SalesReportsViewController {
+public class EmployeeReportsViewController {
 
     @FXML
     private BorderPane pane;

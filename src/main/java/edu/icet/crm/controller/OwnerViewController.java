@@ -27,13 +27,13 @@ public class OwnerViewController {
     @FXML
     void btnCustomerReportsOnAction(ActionEvent event) throws IOException {
         Stage stage = (Stage) btnSalesReports.getScene().getWindow();
-        stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/SalesReportsView.fxml"))));
+        stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/CustomerReportsView.fxml"))));
     }
 
     @FXML
     void btnEmployeesOnAction(ActionEvent event) throws IOException {
         Stage stage = (Stage) btnEmployee.getScene().getWindow();
-        stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/EmployeesView.fxml"))));
+        stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/EmployeeReportsView.fxml"))));
     }
 
     @FXML
@@ -51,6 +51,6 @@ public class OwnerViewController {
 
     public void btnLogOutOnAction(ActionEvent actionEvent) throws IOException {
         Stage stage = (Stage) btnLogOut.getScene().getWindow();
-        stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/MainView.fxml"))));
+        stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/LoginView.fxml"))));
     }
 }
