@@ -1,14 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="edu.icet.crm.controller.OwnerViewController"
-            prefHeight="400.0" prefWidth="600.0">
-
-</AnchorPane>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="511.0" prefWidth="931.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.icet.crm.controller.OwnerViewController">
+    <top>
+        <HBox prefHeight="44.0" prefWidth="749.0" BorderPane.alignment="CENTER">
+            <children>
+                <JFXButton fx:id="btnEmployee" buttonType="RAISED" layoutX="10.0" layoutY="10.0" onAction="#btnEmployeesOnAction" prefHeight="1000.0" prefWidth="1000.0" text="Employees" />
+            <JFXButton fx:id="btnSalesReports" buttonType="RAISED" layoutX="510.0" layoutY="10.0" onAction="#btnSalesReportsOnAction" prefHeight="1000.0" prefWidth="1000.0" text="Sales Reports" />
+                <JFXButton fx:id="btnOrderReports" buttonType="RAISED" layoutX="75.0" layoutY="10.0" onAction="#btnOrderReportsOnAction" prefHeight="1000.0" prefWidth="1000.0" text="Order Reports" />
+                <JFXButton fx:id="btnCustomerReports" buttonType="RAISED" layoutX="140.0" layoutY="10.0" onAction="#btnCustomerReportsOnAction" prefHeight="1000.0" prefWidth="1000.0" text="Customer Reports" />
+            <JFXButton fx:id="btnLogOut" buttonType="RAISED" layoutX="10.0" layoutY="10.0" onAction="#btnLogOutOnAction" prefHeight="1000.0" prefWidth="1000.0" text="Log Out" />
+            </children>
+        </HBox>
+    </top>
+</BorderPane>
