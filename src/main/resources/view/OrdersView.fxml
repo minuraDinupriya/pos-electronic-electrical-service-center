@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 
-<BorderPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="570.0" prefWidth="954.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.icet.crm.controller.OrdersViewController">
+<BorderPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="818.0" prefWidth="1289.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.icet.crm.controller.OrdersViewController">
     <top>
         <HBox prefHeight="44.0" prefWidth="928.0" BorderPane.alignment="CENTER">
             <children>
@@ -21,9 +24,21 @@
         </HBox>
     </top>
     <center>
-        <StackPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="651.0" prefWidth="987.0" BorderPane.alignment="CENTER">
+        <StackPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="825.0" prefWidth="1289.0" BorderPane.alignment="CENTER">
             <children>
-                <AnchorPane prefHeight="513.0" prefWidth="954.0" />
+                <AnchorPane prefHeight="513.0" prefWidth="954.0">
+               <children>
+                  <JFXTextField layoutX="14.0" layoutY="23.0" prefHeight="31.0" prefWidth="286.0" promptText="Search Order by ID or Contact Number" />
+                  <TableView layoutX="18.0" layoutY="77.0" prefHeight="665.0" prefWidth="1251.0">
+                    <columns>
+                      <TableColumn prefWidth="286.0000305175781" text="Order ID" />
+                      <TableColumn prefWidth="263.0" text="Status" />
+                        <TableColumn prefWidth="265.0" text="Catrgory" />
+                        <TableColumn prefWidth="220.0" text="Option 1" />
+                        <TableColumn prefWidth="216.0" text="Option 2" />
+                    </columns>
+                  </TableView>
+               </children></AnchorPane>
             </children>
         </StackPane>
     </center>
