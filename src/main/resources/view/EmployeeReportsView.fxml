@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 
-<BorderPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="695.0" prefWidth="954.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.icet.crm.controller.EmployeeReportsViewController">
+<BorderPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="803.0" prefWidth="1295.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.icet.crm.controller.EmployeeReportsViewController">
     <top>
         <HBox prefHeight="44.0" prefWidth="928.0" BorderPane.alignment="CENTER">
             <children>
@@ -21,9 +24,21 @@
         </HBox>
     </top>
     <center>
-        <StackPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="651.0" prefWidth="987.0" BorderPane.alignment="CENTER">
+        <StackPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="793.0" prefWidth="1295.0" BorderPane.alignment="CENTER">
             <children>
-                <AnchorPane />
+                <AnchorPane prefHeight="651.0" prefWidth="1226.0">
+               <children>
+                  <JFXTextField layoutX="25.0" layoutY="29.0" prefHeight="31.0" prefWidth="473.0" text="Username" />
+                  <JFXTextField layoutX="511.0" layoutY="29.0" prefHeight="31.0" prefWidth="402.0" text="Password" />
+                  <JFXButton layoutX="1008.0" layoutY="29.0" prefHeight="31.0" prefWidth="104.0" text="Add User" />
+                  <TableView layoutX="25.0" layoutY="95.0" prefHeight="608.0" prefWidth="1255.0">
+                    <columns>
+                      <TableColumn prefWidth="603.0" text="User Name" />
+                      <TableColumn prefWidth="478.0" text="Password" />
+                        <TableColumn prefWidth="173.0" text="Option" />
+                    </columns>
+                  </TableView>
+               </children></AnchorPane>
             </children>
         </StackPane>
     </center>
