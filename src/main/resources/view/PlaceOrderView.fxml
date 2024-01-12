@@ -34,25 +34,26 @@
                <children>
                   <JFXTextField fx:id="txtCustomerName" layoutX="41.0" layoutY="28.0" prefHeight="31.0" prefWidth="458.0" promptText="Customer Name" />
                   <JFXTextField fx:id="txtContactNumber" layoutX="553.0" layoutY="28.0" prefHeight="31.0" prefWidth="363.0" promptText="Contact Number" />
-                  <Label layoutX="1085.0" layoutY="43.0" prefHeight="32.0" prefWidth="91.0" text="ODR00001" />
+                  <Label fx:id="lblOrderId" layoutX="1076.0" layoutY="28.0" prefHeight="32.0" prefWidth="91.0" text="ODR00001" />
                   <JFXTextField fx:id="txtEmail" layoutX="38.0" layoutY="78.0" prefHeight="31.0" prefWidth="461.0" promptText="Email Address" />
                   <JFXTextField fx:id="txtItemName" layoutX="38.0" layoutY="124.0" prefHeight="31.0" prefWidth="352.0" promptText="Item Name" />
                   <JFXButton layoutX="816.0" layoutY="124.0" onAction="#addBtnOnAction" prefHeight="40.0" prefWidth="100.0" style="-fx-background-color: green;" text="Add" textFill="WHITE" />
-                  <TableView layoutX="36.0" layoutY="192.0" prefHeight="414.0" prefWidth="1131.0">
+                  <TableView fx:id="table" layoutX="36.0" layoutY="192.0" prefHeight="414.0" prefWidth="1131.0">
                     <columns>
-                      <TableColumn prefWidth="578.0" text="Item No" />
-                        <TableColumn prefWidth="322.0" text="Category" />
-                        <TableColumn prefWidth="230.0" text="Option" />
+                      <TableColumn fx:id="colItemNo" prefWidth="578.0" text="Item No" />
+                        <TableColumn fx:id="colCategory" prefWidth="322.0" text="Category" />
+                        <TableColumn fx:id="colOption" prefWidth="230.0" text="Option" />
                     </columns>
                   </TableView>
-                  <JFXButton layoutX="1046.0" layoutY="629.0" onAction="#placeOrderBtnOnAction" prefHeight="40.0" prefWidth="130.0" style="-fx-background-color: green;" text="Place Order" textFill="WHITE" />
+                  <JFXButton layoutX="1037.0" layoutY="634.0" onAction="#placeOrderBtnOnAction" prefHeight="40.0" prefWidth="130.0" style="-fx-background-color: green;" text="Place Order" textFill="WHITE" />
                   <JFXTextArea layoutX="26.0" layoutY="615.0" prefHeight="77.0" prefWidth="811.0" promptText="Notes..." text="&#10;&#10;" wrapText="true" />
-                  <JFXRadioButton fx:id="electronicToggleBtn" layoutX="543.0" layoutY="114.0" text="Electronic">
+                  <JFXRadioButton fx:id="electronicToggleBtn" layoutX="543.0" layoutY="114.0" text="Electronic" >
                      <toggleGroup>
                         <ToggleGroup fx:id="category" />
                      </toggleGroup>
                   </JFXRadioButton>
                   <JFXRadioButton fx:id="electricalToggleBtn" layoutX="543.0" layoutY="145.0" prefWidth="88.0" text="Electrical" toggleGroup="$category" />
+                  <JFXButton layoutX="939.0" layoutY="124.0" onAction="#clearBtnOnAction" prefHeight="40.0" prefWidth="100.0" style="-fx-background-color: red;" text="Clear" textFill="WHITE" />
                </children>
                 </AnchorPane>
             </children>
