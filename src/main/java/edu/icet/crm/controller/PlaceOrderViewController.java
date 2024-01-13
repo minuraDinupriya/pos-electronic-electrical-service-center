@@ -107,7 +107,6 @@ public class PlaceOrderViewController {
     private JFXButton createDeleteButton() {
         JFXButton deleteButton = new JFXButton("Delete");
         deleteButton.setOnAction(event -> {
-            // Handle the delete button action (you can remove the corresponding row from the table)
             PlaceOrderTm selectedItem = table.getSelectionModel().getSelectedItem();
             table.getItems().remove(selectedItem);
         });
