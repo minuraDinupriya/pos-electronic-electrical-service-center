@@ -3,6 +3,9 @@ package edu.icet.crm.controller;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTextField;
+import edu.icet.crm.bo.BoFactory;
+import edu.icet.crm.bo.BoType;
+import edu.icet.crm.bo.custom.PlaceOrderBo;
 import edu.icet.crm.tm.PlaceOrderTm;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -44,6 +47,7 @@ public class PlaceOrderViewController {
 
     @FXML
     private JFXRadioButton electricalToggleBtn;
+    PlaceOrderBo placeOrderBo= BoFactory.getInstance().getBo(BoType.PLACE_ORDER);
 
     public void initialize() {
         // Set up cell value factories for table columns
@@ -78,7 +82,7 @@ public class PlaceOrderViewController {
     }
 
     @FXML
-    private void addBtnOnAction() {
+    private void saveBtnOnAction() {
         handleCategorySelection();
 
         if (isEmptyField(txtCustomerName) || isEmptyField(txtContactNumber) || isEmptyField(txtEmail)
@@ -131,5 +135,6 @@ public class PlaceOrderViewController {
         category.selectToggle(null);
 
     }
+
 }
 
