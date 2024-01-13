@@ -1,6 +1,7 @@
 package edu.icet.crm.dao;
 
 import edu.icet.crm.dao.custom.impl.PlaceOrderDaoImpl;
+import edu.icet.crm.dao.util.DaoType;
 
 public class DaoFactory {
     private DaoFactory(){}

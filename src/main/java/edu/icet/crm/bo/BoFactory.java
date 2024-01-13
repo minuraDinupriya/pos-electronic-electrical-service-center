@@ -11,7 +11,7 @@ public class BoFactory {
     public <T extends SuperBo>T getBo(BoType boType){
 
         switch (boType){
-            case PLACE_ORDER:return (T)new PlaceOrderBoImpl();
+            case PLACE_ORDER_BO:return (T)new PlaceOrderBoImpl();
         }
 
         return null;

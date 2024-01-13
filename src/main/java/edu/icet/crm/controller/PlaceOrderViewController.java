@@ -123,7 +123,7 @@ public class PlaceOrderViewController {
     }
 
     public void placeOrderBtnOnAction(ActionEvent actionEvent) {
-
+        placeOrderBo.save();
     }
 
     public void clearBtnOnAction() {
