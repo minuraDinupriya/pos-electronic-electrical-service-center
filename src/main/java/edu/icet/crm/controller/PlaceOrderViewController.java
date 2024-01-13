@@ -6,7 +6,7 @@ import com.jfoenix.controls.JFXTextField;
 import edu.icet.crm.bo.BoFactory;
 import edu.icet.crm.bo.BoType;
 import edu.icet.crm.bo.custom.PlaceOrderBo;
-import edu.icet.crm.tm.PlaceOrderTm;
+import edu.icet.crm.dto.tm.PlaceOrderTm;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -47,7 +47,7 @@ public class PlaceOrderViewController {
 
     @FXML
     private JFXRadioButton electricalToggleBtn;
-    PlaceOrderBo placeOrderBo= BoFactory.getInstance().getBo(BoType.PLACE_ORDER);
+    PlaceOrderBo placeOrderBo= BoFactory.getInstance().getBo(BoType.PLACE_ORDER_BO);
 
     public void initialize() {
         // Set up cell value factories for table columns
