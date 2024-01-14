@@ -21,7 +21,7 @@ public class OrdersEntity {
     private String orderDate;
 
     @ManyToOne
-    @JoinColumn(name = "customer_name", nullable = false)//customer_id widiyat wens krnn
+    @JoinColumn(name = "customer_id", nullable = false)//customer_id widiyat wens krnn
     private CustomerEntity customer;
 
     @Column(name = "note")
@@ -30,7 +30,7 @@ public class OrdersEntity {
     @Column(name = "order_status")
     private String orderStatus;//added later
 
-    @OneToMany(mappedBy = "order")
+    @OneToMany(mappedBy = "order", cascade = CascadeType.PERSIST)
     private List<ItemsEntity> items;
 
     public OrdersEntity(String orderId, String orderDate, String note, String orderStatus) {

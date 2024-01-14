@@ -14,11 +14,11 @@ public class PlaceOrderBoImpl implements PlaceOrderBo {
 
     public void save(){
         placeOrderDao.save(new CustomerDto(
-                "cus2",
+                "cus3",
                 "minura",
                 "0705606683",
                 "mranaweera793@gmail.com",
-                "ord1",
+                "ord3",
                 null,
                 null
         ));
