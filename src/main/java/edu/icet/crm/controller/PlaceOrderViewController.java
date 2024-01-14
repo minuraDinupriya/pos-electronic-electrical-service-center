@@ -7,6 +7,8 @@ import edu.icet.crm.bo.BoFactory;
 import edu.icet.crm.bo.BoType;
 import edu.icet.crm.bo.custom.PlaceOrderBo;
 import edu.icet.crm.dto.tm.PlaceOrderTm;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -30,6 +32,7 @@ public class PlaceOrderViewController {
     public TableColumn colItemNo;
     public TableColumn colCategory;
     public TableColumn colOption;
+    public TableColumn colItemName;
     @FXML
     private BorderPane pane;
 
@@ -48,15 +51,16 @@ public class PlaceOrderViewController {
     @FXML
     private JFXRadioButton electricalToggleBtn;
     PlaceOrderBo placeOrderBo= BoFactory.getInstance().getBo(BoType.PLACE_ORDER_BO);
+    ObservableList<PlaceOrderTm> tmList = FXCollections.observableArrayList();
 
     public void initialize() {
         // Set up cell value factories for table columns
-        colItemNo.setCellValueFactory(new PropertyValueFactory<>("itemName"));
+        colItemName.setCellValueFactory(new PropertyValueFactory<>("itemName"));
         colCategory.setCellValueFactory(new PropertyValueFactory<>("category"));
         colOption.setCellValueFactory(new PropertyValueFactory<>("button"));
 
         // Enable editing for the 'item name' column
-        colItemNo.setCellFactory(TextFieldTableCell.forTableColumn());
+        colItemName.setCellFactory(TextFieldTableCell.forTableColumn());
     }
 
     @FXML
@@ -71,19 +75,19 @@ public class PlaceOrderViewController {
         stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/LoginView.fxml"))));
     }
 
-    private void handleCategorySelection() {
-        // Get the selected radio button's text
-        RadioButton selectedRadioButton = (RadioButton) category.getSelectedToggle();
-        if (selectedRadioButton != null) {
-            String selectedCategory = selectedRadioButton.getText();
-            System.out.println(electricalToggleBtn.isSelected());
-            System.out.println("Selected Category: " + selectedCategory);
-        }
-    }
+//    private void handleCategorySelection() {
+//
+//        RadioButton selectedRadioButton = (RadioButton) category.getSelectedToggle();
+//        if (selectedRadioButton != null) {
+//            String selectedCategory = selectedRadioButton.getText();
+//            System.out.println(electricalToggleBtn.isSelected());
+//            System.out.println("Selected Category: " + selectedCategory);
+//        }
+//    }
 
     @FXML
     private void saveBtnOnAction() {
-        handleCategorySelection();
+//        handleCategorySelection();
 
         if (isEmptyField(txtCustomerName) || isEmptyField(txtContactNumber) || isEmptyField(txtEmail)
                 || isEmptyField(txtItemName) || !(electronicToggleBtn.isSelected() || electricalToggleBtn.isSelected()) ) {
@@ -101,7 +105,8 @@ public class PlaceOrderViewController {
             PlaceOrderTm placeOrderTm = new PlaceOrderTm(txtItemName.getText(), selectedCategory, createDeleteButton());
 
             // Add the PlaceOrderTm to the table
-            table.getItems().add(placeOrderTm);
+            tmList.add(placeOrderTm);
+            table.setItems(tmList  );
 
             // Clear the input fields
             clearBtnOnAction();
@@ -128,13 +133,12 @@ public class PlaceOrderViewController {
 
     public void clearBtnOnAction() {
 
-        txtCustomerName.clear();
-        txtContactNumber.clear();
-        txtEmail.clear();
+//        txtCustomerName.clear();
+//        txtContactNumber.clear();
+//        txtEmail.clear();
         txtItemName.clear();
         category.selectToggle(null);
 
     }
-
 }
 

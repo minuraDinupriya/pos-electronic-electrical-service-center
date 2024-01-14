@@ -13,7 +13,7 @@ public class PlaceOrderDaoImpl implements PlaceOrderDao {
         Transaction transaction = session.beginTransaction();
 
         session.save(new CustomerEntity(
-                customerDto.getOrderId(),
+                customerDto.getCustomerId(),
                 customerDto.getCustomerName(),
                 customerDto.getEmail(),
                 customerDto.getContactNumber()

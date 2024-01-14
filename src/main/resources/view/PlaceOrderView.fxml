@@ -40,9 +40,9 @@
                   <JFXButton layoutX="816.0" layoutY="124.0" onAction="#saveBtnOnAction" prefHeight="40.0" prefWidth="100.0" style="-fx-background-color: green;" text="Save" textFill="WHITE" />
                   <TableView fx:id="table" layoutX="36.0" layoutY="192.0" prefHeight="414.0" prefWidth="1131.0">
                     <columns>
-                      <TableColumn fx:id="colItemNo" prefWidth="578.0" text="Item No" />
-                        <TableColumn fx:id="colCategory" prefWidth="322.0" text="Category" />
-                        <TableColumn fx:id="colOption" prefWidth="230.0" text="Option" />
+                        <TableColumn fx:id="colItemName" prefWidth="469.0" text="Item Name" />
+                        <TableColumn fx:id="colCategory" prefWidth="483.0" text="Category" />
+                        <TableColumn fx:id="colOption" prefWidth="178.0" text="Option" />
                     </columns>
                   </TableView>
                   <JFXButton layoutX="1037.0" layoutY="634.0" onAction="#placeOrderBtnOnAction" prefHeight="40.0" prefWidth="130.0" style="-fx-background-color: green;" text="Place Order" textFill="WHITE" />

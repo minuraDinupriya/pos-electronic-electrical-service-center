@@ -21,18 +21,22 @@ public class OrdersEntity {
     private String orderDate;
 
     @ManyToOne
-    @JoinColumn(name = "customer_name", nullable = false)
+    @JoinColumn(name = "customer_name", nullable = false)//customer_id widiyat wens krnn
     private CustomerEntity customer;
 
     @Column(name = "note")
     private String note;
 
+    @Column(name = "order_status")
+    private String orderStatus;//added later
+
     @OneToMany(mappedBy = "order")
     private List<ItemsEntity> items;
 
-    public OrdersEntity(String orderId, String orderDate, String note) {
+    public OrdersEntity(String orderId, String orderDate, String note, String orderStatus) {
         this.orderId = orderId;
         this.orderDate = orderDate;
         this.note = note;
+        this.orderStatus = orderStatus;
     }
 }
