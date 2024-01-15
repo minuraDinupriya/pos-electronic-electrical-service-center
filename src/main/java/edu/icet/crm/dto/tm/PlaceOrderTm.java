@@ -12,6 +12,4 @@ public class PlaceOrderTm {
     private String itemName;
     private String category;
     private JFXButton button;
-
-
 }
