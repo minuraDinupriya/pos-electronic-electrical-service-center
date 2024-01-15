@@ -89,15 +89,6 @@ public class PlaceOrderViewController {
         stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/LoginView.fxml"))));
     }
 
-//    private void handleCategorySelection() {
-//
-//        RadioButton selectedRadioButton = (RadioButton) category.getSelectedToggle();
-//        if (selectedRadioButton != null) {
-//            String selectedCategory = selectedRadioButton.getText();
-//            System.out.println(electricalToggleBtn.isSelected());
-//            System.out.println("Selected Category: " + selectedCategory);
-//        }
-//    }
 
     @FXML
     private void saveBtnOnAction() {
@@ -176,6 +167,16 @@ public class PlaceOrderViewController {
         );
 
         placeOrderBo.save(placeOrderDto);
+
+        txtCustomerName.clear();
+        txtContactNumber.clear();
+        txtEmail.clear();
+        txtItemName.clear();
+        category.selectToggle(null);
+
+        tmList.clear();
+        table.setItems(tmList);
+
     }
 
 
@@ -193,6 +194,9 @@ public class PlaceOrderViewController {
         txtEmail.clear();
         txtItemName.clear();
         category.selectToggle(null);
+
+        tmList.clear();
+        table.setItems(tmList);
     }
 }
 

@@ -45,7 +45,7 @@
                         <TableColumn fx:id="colOption" prefWidth="178.0" text="Option" />
                     </columns>
                   </TableView>
-                  <JFXButton layoutX="1037.0" layoutY="634.0" onAction="#placeOrderBtnOnAction" prefHeight="40.0" prefWidth="130.0" style="-fx-background-color: green;" text="Place Order" textFill="WHITE" />
+                  <JFXButton layoutX="909.0" layoutY="634.0" onAction="#placeOrderBtnOnAction" prefHeight="40.0" prefWidth="130.0" style="-fx-background-color: green;" text="Place Order" textFill="WHITE" />
                   <JFXTextArea fx:id="txtNote" layoutX="26.0" layoutY="615.0" prefHeight="77.0" prefWidth="811.0" promptText="Notes..." text="&#10;&#10;" wrapText="true" />
                   <JFXRadioButton fx:id="electronicToggleBtn" layoutX="543.0" layoutY="114.0" text="Electronic">
                      <toggleGroup>
@@ -54,7 +54,7 @@
                   </JFXRadioButton>
                   <JFXRadioButton fx:id="electricalToggleBtn" layoutX="543.0" layoutY="145.0" prefWidth="88.0" text="Electrical" toggleGroup="$category" />
                   <JFXButton layoutX="939.0" layoutY="124.0" onAction="#clearBtnOnAction" prefHeight="40.0" prefWidth="100.0" style="-fx-background-color: red;" text="Clear" textFill="WHITE" />
-                  <JFXButton layoutX="900.0" layoutY="634.0" onAction="#clearAllBtnOnAction" prefHeight="40.0" prefWidth="100.0" style="-fx-background-color: red;" text="Clear All" textFill="WHITE" />
+                  <JFXButton layoutX="1072.0" layoutY="634.0" onAction="#clearAllBtnOnAction" prefHeight="40.0" prefWidth="100.0" style="-fx-background-color: red;" text="Clear All" textFill="WHITE" />
                </children>
                 </AnchorPane>
             </children>
