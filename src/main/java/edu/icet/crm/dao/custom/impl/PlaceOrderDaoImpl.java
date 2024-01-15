@@ -31,6 +31,36 @@ public class PlaceOrderDaoImpl implements PlaceOrderDao {
         }
     }
 
+    public String getLastCustomerId() {
+        String hql = "SELECT c.customerId FROM CustomerEntity c ORDER BY c.customerId DESC";
+
+        try (Session session = HibernateUtil.getSession()) {
+            Query<String> query = session.createQuery(hql, String.class);
+            query.setMaxResults(1); // Fetch only the first result
+
+            List<String> result = query.getResultList();
+            return result.isEmpty() ? null : result.get(0);
+        } catch (Exception e) {
+            e.printStackTrace(); // Handle the exception appropriately in a production environment
+            return null;
+        }
+    }
+
+    public String getLastItemId() {
+        String hql = "SELECT i.itemId FROM ItemsEntity i ORDER BY i.itemId DESC";
+
+        try (Session session = HibernateUtil.getSession()) {
+            Query<String> query = session.createQuery(hql, String.class);
+            query.setMaxResults(1); // Fetch only the first result
+
+            List<String> result = query.getResultList();
+            return result.isEmpty() ? null : result.get(0);
+        } catch (Exception e) {
+            e.printStackTrace(); // Handle the exception appropriately in a production environment
+            return null;
+        }
+    }
+
     public void save(PlaceOrderDto placeOrderDto) {
         Session session = HibernateUtil.getSession();
         Transaction transaction = session.beginTransaction();

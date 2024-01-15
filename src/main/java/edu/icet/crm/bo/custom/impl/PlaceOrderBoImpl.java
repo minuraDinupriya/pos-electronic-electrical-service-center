@@ -18,39 +18,70 @@ import java.util.List;
 public class PlaceOrderBoImpl implements PlaceOrderBo {
     PlaceOrderDao placeOrderDao= DaoFactory.getInstance().getDao(DaoType.PLACE_ORDER_DAO);
 
-    public void save(){
-        List<OrderDetailsDto> orderDetailsDtoList=new ArrayList<>();
-        orderDetailsDtoList.add(new OrderDetailsDto(
-                "itm5",
-                "Tv",
-                "electrical"
-        ));
+    public String getLastOrderId(){
 
-//        orderDetailsDtoList.add(new OrderDetailsDto(
-//                        "itm6",
-//                        "Tv",
-//                        "electrical"
-//        ));
-
-        String orderId;
         if (placeOrderDao.getLastOrderId()==null){
-            orderId="ord1";
+            return "ord1";
         }else {
 
             int num = Integer.parseInt(placeOrderDao.getLastOrderId().split("[d]")[1]);
-            orderId = String.format("ord%d", ++num);
+            return String.format("ord%d", ++num);
         }
+    }
 
-        placeOrderDao.save(new PlaceOrderDto(
+    public int getLstItemId(){
+        if (placeOrderDao.getLastItemId()==null){
+            return 0;
+        }else {
+            return Integer.parseInt(placeOrderDao.getLastItemId().split("[m]")[1]);
+        }
+    }
 
-                "cus26",
-                "minura",
-                "mranaweera793@gmail.com",
-                "0705606683",
-                orderId,
-                "1",
-                "note",
-                orderDetailsDtoList
-        ));
+    public String getLastCustomerId(){
+        if (placeOrderDao.getLastCustomerId()==null){
+            return "ord1";
+        }else {
+
+            int num = Integer.parseInt(placeOrderDao.getLastCustomerId().split("[s]")[1]);
+            return String.format("cus%d", ++num);
+        }
+    }
+
+//    public void save(){
+//
+//        List<OrderDetailsDto> orderDetailsDtoList=new ArrayList<>();
+//        orderDetailsDtoList.add(new OrderDetailsDto(
+//                "itm5",
+//                "Tv",
+//                "electrical"
+//        ));
+//
+////        orderDetailsDtoList.add(new OrderDetailsDto(
+////                        "itm6",
+////                        "Tv",
+////                        "electrical"
+////        ));
+//
+//        for (OrderDetailsDto orderDetailsDto:orderDetailsDtoList){
+//
+//        }
+//
+//
+//        placeOrderDao.save(new PlaceOrderDto(
+//
+//                "cus26",
+//                "minura",
+//                "mranaweera793@gmail.com",
+//                "0705606683",
+//                "ad",
+//                "1",
+//                "note",
+//                orderDetailsDtoList
+//        ));
+//    }
+
+    @Override
+    public void save(PlaceOrderDto placeOrderDto) {
+        placeOrderDao.save(placeOrderDto);
     }
 }
