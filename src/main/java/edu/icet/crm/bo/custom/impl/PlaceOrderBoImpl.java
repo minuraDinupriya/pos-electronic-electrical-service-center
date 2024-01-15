@@ -21,26 +21,33 @@ public class PlaceOrderBoImpl implements PlaceOrderBo {
     public void save(){
         List<OrderDetailsDto> orderDetailsDtoList=new ArrayList<>();
         orderDetailsDtoList.add(new OrderDetailsDto(
-                "itm3",
+                "itm5",
                 "Tv",
                 "electrical"
         ));
 
-        orderDetailsDtoList.add(new OrderDetailsDto(
-                        "itm4",
-                        "Tv",
-                        "electrical"
-        ));
+//        orderDetailsDtoList.add(new OrderDetailsDto(
+//                        "itm6",
+//                        "Tv",
+//                        "electrical"
+//        ));
 
+        String orderId;
+        if (placeOrderDao.getLastOrderId()==null){
+            orderId="ord1";
+        }else {
 
+            int num = Integer.parseInt(placeOrderDao.getLastOrderId().split("[d]")[1]);
+            orderId = String.format("ord%d", ++num);
+        }
 
         placeOrderDao.save(new PlaceOrderDto(
 
-                "cus25",
+                "cus26",
                 "minura",
                 "mranaweera793@gmail.com",
                 "0705606683",
-                "ord25",
+                orderId,
                 "1",
                 "note",
                 orderDetailsDtoList
