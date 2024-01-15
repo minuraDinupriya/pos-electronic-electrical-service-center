@@ -133,12 +133,17 @@ public class PlaceOrderViewController {
 
     public void clearBtnOnAction() {
 
-//        txtCustomerName.clear();
-//        txtContactNumber.clear();
-//        txtEmail.clear();
         txtItemName.clear();
         category.selectToggle(null);
+    }
 
+    public void clearAllBtnOnAction(ActionEvent actionEvent) {
+
+        txtCustomerName.clear();
+        txtContactNumber.clear();
+        txtEmail.clear();
+        txtItemName.clear();
+        category.selectToggle(null);
     }
 }
 
