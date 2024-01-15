@@ -21,17 +21,26 @@ public class PlaceOrderBoImpl implements PlaceOrderBo {
     public void save(){
         List<OrderDetailsDto> orderDetailsDtoList=new ArrayList<>();
         orderDetailsDtoList.add(new OrderDetailsDto(
-                "itm2",
+                "itm3",
                 "Tv",
                 "electrical"
         ));
+
+        orderDetailsDtoList.add(new OrderDetailsDto(
+                        "itm4",
+                        "Tv",
+                        "electrical"
+        ));
+
+
+
         placeOrderDao.save(new PlaceOrderDto(
 
-                "cus20",
+                "cus25",
                 "minura",
-                "0705606683",
                 "mranaweera793@gmail.com",
-                "ord21",
+                "0705606683",
+                "ord25",
                 "1",
                 "note",
                 orderDetailsDtoList
