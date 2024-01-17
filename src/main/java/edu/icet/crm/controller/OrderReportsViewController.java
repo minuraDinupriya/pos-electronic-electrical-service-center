@@ -123,36 +123,35 @@ public class OrderReportsViewController {
 
     @FXML
     void generateReportsBtnOnAction(ActionEvent actionEvent) {
-//        try {
-//            JasperReport jasperReport = JasperCompileManager.compileReport(getClass().getResourceAsStream("/reports/orderReports.jrxml"));
-//            Map<String, Object> parameters = new HashMap<>();
-//            JRDataSource dataSource = createOrderDataSource();
-//            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, dataSource);
-//            JasperViewer viewer = new JasperViewer(jasperPrint, false);
-//            viewer.setTitle("Order Reports");
-//            viewer.setVisible(true);
-//        } catch (JRException e) {
-//            e.printStackTrace();
-//        }
+        try {
+            JasperReport jasperReport = JasperCompileManager.compileReport(getClass().getResourceAsStream("/reports/orderReports.jrxml"));
+            Map<String, Object> parameters = new HashMap<>();
+            JRDataSource dataSource = createOrderDataSource();
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, dataSource);
+            JasperViewer viewer = new JasperViewer(jasperPrint, false);
+            viewer.setTitle("Order Reports");
+            viewer.setVisible(true);
+        } catch (JRException e) {
+            e.printStackTrace();
+        }
     }
 
     private JRDataSource createOrderDataSource() {
-//        List<OrderDto> orderList = orderReportsViewBo.getAllOrders();
-//
-//        List<OrderReportsViewTm> reportData = new ArrayList<>();
-//
-//        for (OrderDto orderDto : orderList) {
-//            OrderReportsViewTm tm = new OrderReportsViewTm(
-//                    orderDto.getOrderId(),
-//                    orderDto.getNote(),
-//                    orderDto.getOrderDate(),
-//                    orderDto.getStatus(),
-//                    orderDto.getCustomerId()
-//            );
-//            reportData.add(tm);
-//        }
-//
-//        return new JRBeanCollectionDataSource(reportData);
-        return null;
+        List<OrderDto> orderList = orderReportsViewBo.getAllOrders();
+
+        List<OrderReportsViewTm> reportData = new ArrayList<>();
+
+        for (OrderDto orderDto : orderList) {
+            OrderReportsViewTm tm = new OrderReportsViewTm(
+                    orderDto.getOrderId(),
+                    orderDto.getNote(),
+                    orderDto.getOrderDate(),
+                    orderDto.getStatus(),
+                    orderDto.getCustomerId()
+            );
+            reportData.add(tm);
+        }
+
+        return new JRBeanCollectionDataSource(reportData);
     }
 }
