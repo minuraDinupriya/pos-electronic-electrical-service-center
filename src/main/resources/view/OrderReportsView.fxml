@@ -28,16 +28,17 @@
             <children>
                 <AnchorPane>
                <children>
-                  <JFXTextField layoutX="39.0" layoutY="31.0" prefHeight="31.0" prefWidth="297.0" promptText="search by Order ID or Contact Number" />
-                  <TableView layoutX="39.0" layoutY="95.0" prefHeight="625.0" prefWidth="1204.0">
+                  <JFXTextField fx:id="txtSearch" layoutX="39.0" layoutY="31.0" prefHeight="31.0" prefWidth="297.0" promptText="search by Order ID or Contact Number" />
+                  <TableView fx:id="tblOrderReports" layoutX="39.0" layoutY="95.0" prefHeight="625.0" prefWidth="1204.0">
                     <columns>
-                      <TableColumn prefWidth="225.00003051757812" text="Order ID" />
-                      <TableColumn prefWidth="388.9999694824219" text="Item Name" />
-                        <TableColumn prefWidth="273.0" text="Date" />
-                        <TableColumn prefWidth="316.0" text="Net Toatal" />
+                      <TableColumn fx:id="colOrderId" prefWidth="171.0" text="Order ID" />
+                      <TableColumn fx:id="colNote" prefWidth="451.0" text="Note" />
+                        <TableColumn fx:id="colDate" prefWidth="235.0" text="Date" />
+                        <TableColumn fx:id="colOrderStatus" prefWidth="157.0" text="OrderStatus" />
+                        <TableColumn fx:id="colCustomerID" prefWidth="189.0" text="CustomerId" />
                     </columns>
                   </TableView>
-                  <JFXButton layoutX="1069.0" layoutY="744.0" prefHeight="31.0" prefWidth="173.0" text="Generate Reports" />
+                  <JFXButton layoutX="1069.0" layoutY="744.0" onAction="#generateReportsBtnOnAction" prefHeight="31.0" prefWidth="173.0" text="Generate Reports" />
                </children></AnchorPane>
             </children>
         </StackPane>
