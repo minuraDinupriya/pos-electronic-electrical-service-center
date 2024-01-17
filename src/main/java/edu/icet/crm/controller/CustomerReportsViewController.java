@@ -50,7 +50,7 @@ public class CustomerReportsViewController {
         colName.setCellValueFactory(new PropertyValueFactory<>("name"));
         colContactNumber.setCellValueFactory(new PropertyValueFactory<>("contactNumber"));
         colEmailAddress.setCellValueFactory(new PropertyValueFactory<>("emailAddress"));
-        colDeleteBtn.setCellValueFactory(new PropertyValueFactory<>("deleteBtn"));
+//        colDeleteBtn.setCellValueFactory(new PropertyValueFactory<>("deleteBtn"));
 
         populateTable();
 
