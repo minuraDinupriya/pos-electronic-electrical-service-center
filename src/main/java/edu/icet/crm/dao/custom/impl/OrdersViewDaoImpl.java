@@ -19,7 +19,7 @@ public class OrdersViewDaoImpl implements OrdersViewDao {
             Query<OrdersViewDto> query = session.createQuery(hql, OrdersViewDto.class);
             return query.getResultList();
         } catch (Exception e) {
-            e.printStackTrace(); // Handle the exception appropriately in a production environment
+            e.printStackTrace();
             return null;
         }
     }
@@ -33,18 +33,18 @@ public class OrdersViewDaoImpl implements OrdersViewDao {
                 OrdersEntity ordersEntity = session.get(OrdersEntity.class, orderId);
                 if (ordersEntity != null) {
                     ordersEntity.setOrderStatus(newStatus);
-                    // Update other fields if needed
 
-                    // Commit the transaction
+
+
                     transaction.commit();
                     return true;
                 } else {
-                    return false; // Order not found
+                    return false;
                 }
             } catch (Exception e) {
-                // Rollback the transaction in case of an exception
+
                 transaction.rollback();
-                e.printStackTrace(); // Handle the exception appropriately in a production environment
+                e.printStackTrace();
                 return false;
             }
         }

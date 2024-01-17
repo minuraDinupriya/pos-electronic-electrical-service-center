@@ -21,12 +21,12 @@ public class PlaceOrderDaoImpl implements PlaceOrderDao {
 
         try (Session session = HibernateUtil.getSession()) {
             Query<String> query = session.createQuery(hql, String.class);
-            query.setMaxResults(1); // Fetch only the first result
+            query.setMaxResults(1);
 
             List<String> result = query.getResultList();
             return result.isEmpty() ? null : result.get(0);
         } catch (Exception e) {
-            e.printStackTrace(); // Handle the exception appropriately in a production environment
+            e.printStackTrace();
             return null;
         }
     }
@@ -36,12 +36,12 @@ public class PlaceOrderDaoImpl implements PlaceOrderDao {
 
         try (Session session = HibernateUtil.getSession()) {
             Query<String> query = session.createQuery(hql, String.class);
-            query.setMaxResults(1); // Fetch only the first result
+            query.setMaxResults(1);
 
             List<String> result = query.getResultList();
             return result.isEmpty() ? null : result.get(0);
         } catch (Exception e) {
-            e.printStackTrace(); // Handle the exception appropriately in a production environment
+            e.printStackTrace();
             return null;
         }
     }
@@ -56,7 +56,7 @@ public class PlaceOrderDaoImpl implements PlaceOrderDao {
             List<String> result = query.getResultList();
             return result.isEmpty() ? null : result.get(0);
         } catch (Exception e) {
-            e.printStackTrace(); // Handle the exception appropriately in a production environment
+            e.printStackTrace();
             return null;
         }
     }
@@ -82,7 +82,7 @@ public class PlaceOrderDaoImpl implements PlaceOrderDao {
                     placeOrderDto.getNote(),
                     "PENDING"
             );
-            ordersEntity.setCustomer(customerEntity);  // Set the association manually
+            ordersEntity.setCustomer(customerEntity);
             session.save(ordersEntity);
 
             // Save Items
@@ -94,17 +94,16 @@ public class PlaceOrderDaoImpl implements PlaceOrderDao {
                         dto.getCategory(),
                         "PENDING"
                 );
-                itemsEntity.setOrder(ordersEntity);  // Set the association manually
+                itemsEntity.setOrder(ordersEntity);
                 itemsEntities.add(itemsEntity);
                 session.save(itemsEntity);
             }
 
-            // Commit the transaction
             transaction.commit();
         } catch (Exception e) {
-            // Rollback the transaction in case of an exception
+
             transaction.rollback();
-            e.printStackTrace(); // Handle the exception appropriately in a production environment
+            e.printStackTrace();
         } finally {
             session.close();
         }

@@ -1,5 +1,6 @@
 package edu.icet.crm.bo;
 
+import edu.icet.crm.bo.custom.impl.ItemsViewBoImpl;
 import edu.icet.crm.bo.custom.impl.OrdersViewBoImpl;
 import edu.icet.crm.bo.custom.impl.PlaceOrderBoImpl;
 import edu.icet.crm.dao.custom.impl.OrdersViewDaoImpl;
@@ -15,6 +16,7 @@ public class BoFactory {
         switch (boType){
             case PLACE_ORDER_BO:return (T)new PlaceOrderBoImpl();
             case ORDERS_VIEW_BO:return (T)new OrdersViewBoImpl();
+            case ITEMS_VIEW_BO:return (T)new ItemsViewBoImpl();
         }
 
         return null;

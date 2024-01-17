@@ -49,11 +49,11 @@ public class OrdersViewController {
 
     private OrdersViewBo ordersViewBo= BoFactory.getInstance().getBo(BoType.ORDERS_VIEW_BO);
 
-// Existing code...
+
 
     @FXML
     private void initialize() {
-        // Set up cell value factories for table columns
+
         colOrderId.setCellValueFactory(new PropertyValueFactory<>("orderId"));
         colStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
         colCustomerId.setCellValueFactory(new PropertyValueFactory<>("customerId"));
@@ -62,10 +62,10 @@ public class OrdersViewController {
         colCloseBtn.setCellValueFactory(new PropertyValueFactory<>("closeOrderButton"));
         colReturnBtn.setCellValueFactory(new PropertyValueFactory<>("returnButton"));
 
-        // Load data to the table
+
         loadDataToTable();
 
-        // Set up row click event
+
         table.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
                 lblOrderID.setText(newValue.getOrderId());
@@ -86,8 +86,6 @@ public class OrdersViewController {
                 JFXButton returnButton = new JFXButton("Return");
                 JFXButton closeOrderButton = new JFXButton("Close Order");
 
-                // Set actions for buttons if needed
-
                 tmList.add(new OrdersViewTm(
                         order.getOrderId(),
                         order.getStatus(),
@@ -102,8 +100,6 @@ public class OrdersViewController {
 
         table.setItems(tmList);
     }
-
-    // Existing code...
 
     @FXML
     void backBtnOnAction(ActionEvent event) throws IOException {
@@ -126,11 +122,11 @@ public class OrdersViewController {
             boolean updateSuccess = ordersViewBo.updateOrderStatus(selectedOrder.getOrderId(), selectedStatus);
 
             if (updateSuccess) {
-                // Show pop-up for successful update
+
                 showAlert("Update Successful", "Order status updated successfully.");
                 loadDataToTable();
             } else {
-                // Show pop-up for unsuccessful update
+
                 showAlert("Update Failed", "Failed to update order status.");
             }
         }

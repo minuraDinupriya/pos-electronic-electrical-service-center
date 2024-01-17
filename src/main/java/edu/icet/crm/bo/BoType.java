@@ -1,5 +1,5 @@
 package edu.icet.crm.bo;
 
 public enum BoType {
-    PLACE_ORDER_BO,ORDERS_VIEW_BO
+    PLACE_ORDER_BO,ORDERS_VIEW_BO,ITEMS_VIEW_BO
 }
