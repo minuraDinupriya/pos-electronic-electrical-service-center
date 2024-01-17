@@ -176,7 +176,7 @@ public class PlaceOrderViewController {
 
         tmList.clear();
         table.setItems(tmList);
-
+        initialize();
     }
 
 

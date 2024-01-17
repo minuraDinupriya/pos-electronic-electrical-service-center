@@ -30,7 +30,7 @@ public class PlaceOrderBoImpl implements PlaceOrderBo {
 
     public String getLastCustomerId(){
         if (placeOrderDao.getLastCustomerId()==null){
-            return "ord1";
+            return "cus1";
         }else {
 
             int num = Integer.parseInt(placeOrderDao.getLastCustomerId().split("[s]")[1]);

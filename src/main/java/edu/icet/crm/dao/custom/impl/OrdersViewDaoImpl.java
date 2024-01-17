@@ -5,7 +5,10 @@ import edu.icet.crm.dao.util.HibernateUtil;
 import edu.icet.crm.dto.OrdersViewDto;
 
 import java.util.List;
+
+import edu.icet.crm.entity.OrdersEntity;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 public class OrdersViewDaoImpl implements OrdersViewDao {
     @Override
@@ -18,6 +21,32 @@ public class OrdersViewDaoImpl implements OrdersViewDao {
         } catch (Exception e) {
             e.printStackTrace(); // Handle the exception appropriately in a production environment
             return null;
+        }
+    }
+
+    @Override
+    public boolean updateOrderStatus(String orderId, String newStatus) {
+        try (Session session = HibernateUtil.getSession()) {
+            Transaction transaction = session.beginTransaction();
+
+            try {
+                OrdersEntity ordersEntity = session.get(OrdersEntity.class, orderId);
+                if (ordersEntity != null) {
+                    ordersEntity.setOrderStatus(newStatus);
+                    // Update other fields if needed
+
+                    // Commit the transaction
+                    transaction.commit();
+                    return true;
+                } else {
+                    return false; // Order not found
+                }
+            } catch (Exception e) {
+                // Rollback the transaction in case of an exception
+                transaction.rollback();
+                e.printStackTrace(); // Handle the exception appropriately in a production environment
+                return false;
+            }
         }
     }
 }

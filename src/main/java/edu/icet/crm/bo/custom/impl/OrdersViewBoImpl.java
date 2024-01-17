@@ -14,4 +14,7 @@ public class OrdersViewBoImpl implements OrdersViewBo {
     public List<OrdersViewDto> getOrdersViewDto() {
         return orderViewDao.getOrdersViewDto();
     }
+    public boolean updateOrderStatus(String orderId, String newStatus){
+        return orderViewDao.updateOrderStatus(orderId,newStatus);
+    }
 }

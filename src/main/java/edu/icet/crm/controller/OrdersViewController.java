@@ -2,6 +2,7 @@ package edu.icet.crm.controller;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXTextField;
 import edu.icet.crm.bo.BoFactory;
 import edu.icet.crm.bo.BoType;
 import edu.icet.crm.bo.custom.OrdersViewBo;
@@ -13,6 +14,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -35,6 +37,7 @@ public class OrdersViewController {
     public Label lblOrderID;
     public JFXComboBox comboStatus;
     public TableView<OrdersViewTm> table;
+    public JFXTextField txtSearch;
     @FXML
     private BorderPane pane;
 
@@ -61,6 +64,17 @@ public class OrdersViewController {
 
         // Load data to the table
         loadDataToTable();
+
+        // Set up row click event
+        table.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                lblOrderID.setText(newValue.getOrderId());
+            }
+        });
+
+        // Set up combo box with status values
+        ObservableList<String> statusOptions = FXCollections.observableArrayList("PENDING", "PROCESSING", "COMPLETED");
+        comboStatus.setItems(statusOptions);
     }
 
     private void loadDataToTable() {
@@ -104,11 +118,36 @@ public class OrdersViewController {
         stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/LoginView.fxml"))));
     }
 
-    public void updateBtnOnAction(ActionEvent actionEvent) {
+    @FXML
+    void updateBtnOnAction(ActionEvent actionEvent) {
+        OrdersViewTm selectedOrder = table.getSelectionModel().getSelectedItem();
+        if (selectedOrder != null) {
+            String selectedStatus = comboStatus.getValue().toString();
+            boolean updateSuccess = ordersViewBo.updateOrderStatus(selectedOrder.getOrderId(), selectedStatus);
 
+            if (updateSuccess) {
+                // Show pop-up for successful update
+                showAlert("Update Successful", "Order status updated successfully.");
+                loadDataToTable();
+            } else {
+                // Show pop-up for unsuccessful update
+                showAlert("Update Failed", "Failed to update order status.");
+            }
+        }
+    }
+
+    private void showAlert(String title, String message) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 
     public void statusComboOnAction(ActionEvent actionEvent) {
 
+    }
+
+    public void seachOrderOnAction(ActionEvent actionEvent) {
     }
 }

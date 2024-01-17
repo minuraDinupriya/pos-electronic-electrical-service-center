@@ -6,4 +6,5 @@ import edu.icet.crm.entity.OrdersEntity;
 import java.util.List;
 public interface OrdersViewDao extends SuperDao {
     public List<OrdersViewDto> getOrdersViewDto();
+    boolean updateOrderStatus(String orderId, String newStatus);
 }

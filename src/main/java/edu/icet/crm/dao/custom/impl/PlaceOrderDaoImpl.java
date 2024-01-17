@@ -80,7 +80,7 @@ public class PlaceOrderDaoImpl implements PlaceOrderDao {
                     placeOrderDto.getOrderId(),
                     placeOrderDto.getDate(),
                     placeOrderDto.getNote(),
-                    "pending"
+                    "PENDING"
             );
             ordersEntity.setCustomer(customerEntity);  // Set the association manually
             session.save(ordersEntity);
@@ -92,7 +92,7 @@ public class PlaceOrderDaoImpl implements PlaceOrderDao {
                         dto.getItemCode(),
                         dto.getItemName(),
                         dto.getCategory(),
-                        "pending"
+                        "PENDING"
                 );
                 itemsEntity.setOrder(ordersEntity);  // Set the association manually
                 itemsEntities.add(itemsEntity);
