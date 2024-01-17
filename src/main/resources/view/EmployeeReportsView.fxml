@@ -28,14 +28,15 @@
             <children>
                 <AnchorPane prefHeight="651.0" prefWidth="1226.0">
                <children>
-                  <JFXTextField layoutX="25.0" layoutY="29.0" prefHeight="31.0" prefWidth="473.0" text="Username" />
-                  <JFXTextField layoutX="511.0" layoutY="29.0" prefHeight="31.0" prefWidth="402.0" text="Password" />
-                  <JFXButton layoutX="1008.0" layoutY="29.0" prefHeight="31.0" prefWidth="104.0" text="Add User" />
-                  <TableView layoutX="25.0" layoutY="95.0" prefHeight="608.0" prefWidth="1255.0">
+                  <JFXTextField fx:id="txtUserName" layoutX="25.0" layoutY="29.0" prefHeight="31.0" prefWidth="473.0" text="Username" />
+                  <JFXTextField fx:id="txtPassword" layoutX="511.0" layoutY="29.0" prefHeight="31.0" prefWidth="402.0" text="Password" />
+                  <JFXButton layoutX="1008.0" layoutY="29.0" onAction="#addUserOnAction" prefHeight="31.0" prefWidth="104.0" text="Add User" />
+                  <TableView fx:id="tblUsers" layoutX="25.0" layoutY="95.0" prefHeight="608.0" prefWidth="1255.0">
                     <columns>
-                      <TableColumn prefWidth="603.0" text="User Name" />
-                      <TableColumn prefWidth="478.0" text="Password" />
-                        <TableColumn prefWidth="173.0" text="Option" />
+                      <TableColumn fx:id="colUserId" prefWidth="194.0" text="User Id" />
+                      <TableColumn fx:id="colEmailAdress" prefWidth="547.0" text="User Name (Email Address)" />
+                        <TableColumn fx:id="colPassword" prefWidth="362.0" text="Password" />
+                        <TableColumn fx:id="colOption" prefWidth="151.0" text="Option" />
                     </columns>
                   </TableView>
                </children></AnchorPane>
