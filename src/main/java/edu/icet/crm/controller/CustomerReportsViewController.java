@@ -123,17 +123,14 @@ public class CustomerReportsViewController {
 
     public void generateReportsBtnOnAction(ActionEvent actionEvent) {
         try {
-            // Compile JRXML file to JasperReport
+
             JasperReport jasperReport = JasperCompileManager.compileReport(getClass().getResourceAsStream("/reports/customerReports.jrxml"));
 
-            // Create empty parameters map
             Map<String, Object> parameters = new HashMap<>();
 
-            // Fill the report with data
-            JRDataSource dataSource = createDataSource(); // Implement this method to return a JRDataSource with your data
+            JRDataSource dataSource = createDataSource();
             JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, dataSource);
 
-            // View the report
             JasperViewer viewer = new JasperViewer(jasperPrint, false);
             viewer.setTitle("Customer Reports");
             viewer.setVisible(true);
@@ -145,10 +142,8 @@ public class CustomerReportsViewController {
     private JRDataSource createDataSource() {
         List<CustomerDto> customerList = customerReportsViewBo.getCustomers();
 
-        // Create a list to store JavaBeans for the report
         List<CustomerBean> reportData = new ArrayList<>();
 
-        // Convert CustomerDto objects to CustomerReportsViewBean objects
         for (CustomerDto customerDto : customerList) {
             CustomerBean bean = new CustomerBean(
                     customerDto.getCustomerId(),
@@ -159,7 +154,6 @@ public class CustomerReportsViewController {
             reportData.add(bean);
         }
 
-        // Use JRBeanCollectionDataSource to create a data source
         return new JRBeanCollectionDataSource(reportData);
     }
 
