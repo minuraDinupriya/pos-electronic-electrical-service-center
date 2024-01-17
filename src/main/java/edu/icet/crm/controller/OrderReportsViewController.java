@@ -5,6 +5,7 @@ import com.jfoenix.controls.JFXTextField;
 import edu.icet.crm.bo.BoFactory;
 import edu.icet.crm.bo.BoType;
 import edu.icet.crm.bo.custom.OrderReportsViewBo;
+import edu.icet.crm.dto.OrderBean;
 import edu.icet.crm.dto.OrderDto;
 import edu.icet.crm.dto.tm.OrderReportsViewTm;
 import javafx.collections.FXCollections;
@@ -139,17 +140,17 @@ public class OrderReportsViewController {
     private JRDataSource createOrderDataSource() {
         List<OrderDto> orderList = orderReportsViewBo.getAllOrders();
 
-        List<OrderReportsViewTm> reportData = new ArrayList<>();
+        List<OrderBean> reportData = new ArrayList<>();
 
         for (OrderDto orderDto : orderList) {
-            OrderReportsViewTm tm = new OrderReportsViewTm(
+            OrderBean bean = new OrderBean(
                     orderDto.getOrderId(),
-                    orderDto.getNote(),
-                    orderDto.getOrderDate(),
                     orderDto.getStatus(),
-                    orderDto.getCustomerId()
+                    orderDto.getCustomerId(),
+                    orderDto.getOrderDate(),
+                    orderDto.getNote()
             );
-            reportData.add(tm);
+            reportData.add(bean);
         }
 
         return new JRBeanCollectionDataSource(reportData);

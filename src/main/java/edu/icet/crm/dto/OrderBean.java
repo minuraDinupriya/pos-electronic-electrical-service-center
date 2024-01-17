@@ -9,9 +9,9 @@ import lombok.*;
 @Getter
 @Setter
 public class OrderBean {
-    private String orderId;
-    private String status;
-    private String customerId;
-    private String orderDate;
+    private String order_id;
+    private String order_status;
+    private String customer_id;
+    private String order_date;
     private String note;
 }
