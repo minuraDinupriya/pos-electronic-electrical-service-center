@@ -11,7 +11,6 @@
          <children>
             <JFXButton buttonType="RAISED" onAction="#placeOrderBtnOnAction" prefHeight="1000.0" prefWidth="1000.0" style="-fx-background-color: #00008B;" text="Place Order" textFill="WHITE" />
             <JFXButton fx:id="btnItems" buttonType="RAISED" layoutX="10.0" layoutY="10.0" onAction="#itemsBtnOnAction" prefHeight="1000.0" prefWidth="1000.0" text="Items" />
-            <JFXButton fx:id="btnCustomers" buttonType="RAISED" layoutX="75.0" layoutY="10.0" onAction="#customerBtnOnAction" prefHeight="1000.0" prefWidth="1000.0" text="Customers" />
             <JFXButton fx:id="btnOrders" buttonType="RAISED" layoutX="140.0" layoutY="10.0" onAction="#orderBtnOnAction" prefHeight="1000.0" prefWidth="1000.0" text="Orders" />
             <JFXButton fx:id="btnLogOut" buttonType="RAISED" layoutX="571.0" layoutY="10.0" onAction="#logOutBtnOnAction" prefHeight="1000.0" prefWidth="1000.0" text="Log Out">
                <HBox.margin>
