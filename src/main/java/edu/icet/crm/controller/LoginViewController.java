@@ -31,6 +31,6 @@ public class LoginViewController {
 
     public void btnSubmitOnAction(ActionEvent actionEvent) throws IOException {
         Stage stage = (Stage) btnSubmit.getScene().getWindow();
-        stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/EmployeeView.fxml"))));
+        stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/OwnerView.fxml"))));
     }
 }

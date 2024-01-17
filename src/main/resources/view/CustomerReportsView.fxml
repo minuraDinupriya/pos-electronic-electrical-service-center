@@ -28,13 +28,13 @@
          <children>
             <AnchorPane prefHeight="651.0" prefWidth="1035.0">
                <children>
-                  <JFXTextField layoutX="43.0" layoutY="31.0" prefHeight="31.0" prefWidth="368.0" promptText="Search Customer" />
+                  <JFXTextField fx:id="txtSearch" layoutX="43.0" layoutY="31.0" prefHeight="31.0" prefWidth="368.0" promptText="Search Customer" />
                   <TableView fx:id="tblCustomerReports" layoutX="43.0" layoutY="88.0" prefHeight="704.0" prefWidth="1221.0">
                     <columns>
                       <TableColumn fx:id="colCustomerId" prefWidth="157.0" text="Customer ID" />
                       <TableColumn fx:id="colName" prefWidth="371.0" text="Name" />
                         <TableColumn fx:id="colContactNumber" prefWidth="235.0" text="Contact Number" />
-                        <TableColumn fx:id="colEmilAddress" prefWidth="349.0" text="Email Address" />
+                        <TableColumn fx:id="colEmailAddress" prefWidth="349.0" text="Email Address" />
                         <TableColumn fx:id="colDeleteBtn" prefWidth="108.0" text="Delete" />
                     </columns>
                   </TableView>
