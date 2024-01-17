@@ -5,7 +5,8 @@ import com.jfoenix.controls.JFXTextField;
 import edu.icet.crm.bo.BoFactory;
 import edu.icet.crm.bo.BoType;
 import edu.icet.crm.bo.custom.CustomerReportsViewBo;
-import edu.icet.crm.dto.CustomerReportsViewDto;
+import edu.icet.crm.dto.CustomerBean;
+import edu.icet.crm.dto.CustomerDto;
 
 import edu.icet.crm.dto.tm.CustomerReportsViewTm;
 import javafx.collections.FXCollections;
@@ -19,9 +20,15 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import net.sf.jasperreports.engine.*;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.view.JasperViewer;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class CustomerReportsViewController {
 
@@ -60,9 +67,9 @@ public class CustomerReportsViewController {
     private void populateTable() {
         customerData.clear();
 
-        List<CustomerReportsViewDto> customerList = customerReportsViewBo.getCustomers();
+        List<CustomerDto> customerList = customerReportsViewBo.getCustomers();
 
-        for (CustomerReportsViewDto customerDto : customerList) {
+        for (CustomerDto customerDto : customerList) {
             JFXButton deleteBtn = new JFXButton("Delete");
             deleteBtn.setStyle("-fx-background-color: #FF0000; -fx-text-fill: #FFFFFF;");
 
@@ -113,4 +120,47 @@ public class CustomerReportsViewController {
         Stage stage = (Stage) pane.getScene().getWindow();
         stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/LoginView.fxml"))));
     }
+
+    public void generateReportsBtnOnAction(ActionEvent actionEvent) {
+        try {
+            // Compile JRXML file to JasperReport
+            JasperReport jasperReport = JasperCompileManager.compileReport(getClass().getResourceAsStream("/reports/customerReports.jrxml"));
+
+            // Create empty parameters map
+            Map<String, Object> parameters = new HashMap<>();
+
+            // Fill the report with data
+            JRDataSource dataSource = createDataSource(); // Implement this method to return a JRDataSource with your data
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, dataSource);
+
+            // View the report
+            JasperViewer viewer = new JasperViewer(jasperPrint, false);
+            viewer.setTitle("Customer Reports");
+            viewer.setVisible(true);
+        } catch (JRException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private JRDataSource createDataSource() {
+        List<CustomerDto> customerList = customerReportsViewBo.getCustomers();
+
+        // Create a list to store JavaBeans for the report
+        List<CustomerBean> reportData = new ArrayList<>();
+
+        // Convert CustomerDto objects to CustomerReportsViewBean objects
+        for (CustomerDto customerDto : customerList) {
+            CustomerBean bean = new CustomerBean(
+                    customerDto.getCustomerId(),
+                    customerDto.getName(),
+                    customerDto.getContactNumber(),
+                    customerDto.getEmailAddress()
+            );
+            reportData.add(bean);
+        }
+
+        // Use JRBeanCollectionDataSource to create a data source
+        return new JRBeanCollectionDataSource(reportData);
+    }
+
 }

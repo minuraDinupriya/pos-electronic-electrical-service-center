@@ -7,7 +7,7 @@ import lombok.*;
 @ToString
 @Getter
 @Setter
-public class ItemsViewDto {
+public class ItemDto {
 
     private String itemId;
     private String status;

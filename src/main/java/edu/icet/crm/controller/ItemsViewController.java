@@ -6,7 +6,7 @@ import com.jfoenix.controls.JFXComboBox;
 import edu.icet.crm.bo.BoFactory;
 import edu.icet.crm.bo.BoType;
 import edu.icet.crm.bo.custom.ItemsViewBo;
-import edu.icet.crm.dto.ItemsViewDto;
+import edu.icet.crm.dto.ItemDto;
 import edu.icet.crm.dto.tm.ItemsViewTm;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -75,9 +75,9 @@ public class ItemsViewController {
 
         itemsData.clear();
 
-        List<ItemsViewDto> itemsList = itemsViewBo.getAllItems();
+        List<ItemDto> itemsList = itemsViewBo.getAllItems();
 
-        for (ItemsViewDto itemDto : itemsList) {
+        for (ItemDto itemDto : itemsList) {
             JFXButton deleteButton = new JFXButton("Delete");
             deleteButton.setStyle("-fx-background-color: #FF0000; -fx-text-fill: #FFFFFF;");
             deleteButton.setOnAction(event -> deleteItem(itemDto.getItemId()));

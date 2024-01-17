@@ -1,19 +1,22 @@
 package edu.icet.crm.dto;
 
 import lombok.*;
-
-import java.util.List;
+import com.fasterxml.jackson.annotation.JsonProperty;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
 @Getter
 @Setter
 public class CustomerDto {
+    @JsonProperty("customer_id")
     private String customerId;
-    private String customerName;
+
+    @JsonProperty("customer_name")
+    private String name;
+
+    @JsonProperty("contact_number")
     private String contactNumber;
-    private String email;
-    private String orderId;
-    private List<OrderDto> orderDtoList;
-    private List<OrderDetailsDto> orderDetailsDtoList;//optional???
+
+    @JsonProperty("email_address")
+    private String emailAddress;
 }
