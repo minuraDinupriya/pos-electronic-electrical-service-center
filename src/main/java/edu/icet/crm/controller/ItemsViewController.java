@@ -2,6 +2,7 @@
 package edu.icet.crm.controller;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXComboBox;
 import edu.icet.crm.bo.BoFactory;
 import edu.icet.crm.bo.BoType;
 import edu.icet.crm.bo.custom.ItemsViewBo;
@@ -14,6 +15,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -30,7 +32,9 @@ public class ItemsViewController {
     public TableColumn colName;
     public TableColumn colOrderId;
     public TableColumn colDelete;
-    public TableView tblItems;
+    public TableView<ItemsViewTm> tblItems;
+    public Label lblOrderID;
+    public JFXComboBox comboStatus;
     @FXML
     private BorderPane pane;
 
@@ -56,6 +60,15 @@ public class ItemsViewController {
         colDelete.setCellValueFactory(new PropertyValueFactory<>("deleteButton"));
 
         populateTable();
+
+        tblItems.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                lblOrderID.setText(newValue.getItemId());
+            }
+        });
+
+        ObservableList<String> statusOptions = FXCollections.observableArrayList("PENDING", "PROCESSING", "COMPLETED");
+        comboStatus.setItems(statusOptions);
     }
 
     private void populateTable() {
@@ -117,4 +130,45 @@ public class ItemsViewController {
         stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/LoginView.fxml"))));
     }
 
+    @FXML
+    private void updateBtnOnAction(ActionEvent event) {
+        String selectedStatus = (String) comboStatus.getValue();
+        String orderId = lblOrderID.getText();
+
+        if (selectedStatus != null && !selectedStatus.isEmpty() && orderId != null && !orderId.isEmpty()) {
+            boolean updateResult = itemsViewBo.updateItemStatus(orderId, selectedStatus);
+            showUpdatePopup(updateResult);
+        } else {
+            showAlert("Invalid Input", "Please select a status and ensure the order ID is available.");
+        }
+    }
+
+    private void showUpdatePopup(boolean updateResult) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Update Result");
+
+        if (updateResult) {
+            alert.setContentText("Item status updated successfully!");
+            populateTable();
+        } else {
+            alert.setContentText("Failed to update item status.");
+        }
+
+        alert.showAndWait();
+    }
+
+    private void showAlert(String title, String content) {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle(title);
+        alert.setContentText(content);
+        alert.showAndWait();
+    }
+
+//    public void updateBtnOnAction(ActionEvent actionEvent) {
+//
+//    }
+
+    public void statusComboOnAction(ActionEvent actionEvent) {
+
+    }
 }

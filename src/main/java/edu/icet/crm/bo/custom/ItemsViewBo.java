@@ -8,4 +8,5 @@ import java.util.List;
 public interface ItemsViewBo extends SuperBo {
     public List<ItemsViewDto> getAllItems();
     public boolean deleteItem(String itemId);
+    public boolean updateItemStatus(String orderId, String newStatus);
 }

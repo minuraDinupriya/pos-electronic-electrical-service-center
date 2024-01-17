@@ -33,9 +33,6 @@ public class OrdersViewDaoImpl implements OrdersViewDao {
                 OrdersEntity ordersEntity = session.get(OrdersEntity.class, orderId);
                 if (ordersEntity != null) {
                     ordersEntity.setOrderStatus(newStatus);
-
-
-
                     transaction.commit();
                     return true;
                 } else {

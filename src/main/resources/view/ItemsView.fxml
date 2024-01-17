@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Font?>
 
 <BorderPane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="796.0" prefWidth="1255.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.icet.crm.controller.ItemsViewController">
     <top>
@@ -29,8 +32,7 @@
                 <AnchorPane prefHeight="647.0" prefWidth="1029.0">
                <children>
                   <JFXTextField layoutX="16.0" layoutY="30.0" prefHeight="31.0" prefWidth="326.0" promptText="Search Item" />
-                  <JFXButton layoutX="402.0" layoutY="30.0" prefHeight="31.0" prefWidth="104.0" text="Search???" />
-                  <TableView fx:id="tblItems" layoutX="16.0" layoutY="75.0" prefHeight="613.0" prefWidth="1226.0">
+                  <TableView fx:id="tblItems" layoutX="16.0" layoutY="83.0" prefHeight="605.0" prefWidth="1226.0">
                     <columns>
                       <TableColumn fx:id="colItemId" prefWidth="182.00003051757812" text="Item ID" />
                       <TableColumn fx:id="colStatus" prefWidth="176.0" text="Status" />
@@ -40,6 +42,13 @@
                         <TableColumn fx:id="colDelete" prefWidth="140.0" text="Delete" />
                     </columns>
                   </TableView>
+                  <Label fx:id="lblOrderID" layoutX="465.0" layoutY="30.0" prefHeight="21.0" prefWidth="109.0" text="Order Id">
+                     <font>
+                        <Font size="21.0" />
+                     </font>
+                  </Label>
+                  <JFXComboBox fx:id="comboStatus" layoutX="594.0" layoutY="30.0" onAction="#statusComboOnAction" prefHeight="31.0" prefWidth="177.0" />
+                  <JFXButton layoutX="801.0" layoutY="30.0" onAction="#updateBtnOnAction" prefHeight="31.0" prefWidth="133.0" text="Update " />
                </children></AnchorPane>
             </children>
         </StackPane>

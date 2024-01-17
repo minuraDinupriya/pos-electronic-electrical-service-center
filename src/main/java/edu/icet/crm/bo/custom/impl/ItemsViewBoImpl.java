@@ -23,4 +23,9 @@ public class ItemsViewBoImpl implements ItemsViewBo {
     public boolean deleteItem(String itemId) {
         return itemsViewDao.deleteItem(itemId);
     }
+
+    @Override
+    public boolean updateItemStatus(String orderId, String newStatus) {
+        return itemsViewDao.updateItemStatus(orderId,newStatus);
+    }
 }

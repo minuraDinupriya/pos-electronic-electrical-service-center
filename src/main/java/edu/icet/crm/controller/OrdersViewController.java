@@ -72,7 +72,6 @@ public class OrdersViewController {
             }
         });
 
-        // Set up combo box with status values
         ObservableList<String> statusOptions = FXCollections.observableArrayList("PENDING", "PROCESSING", "COMPLETED");
         comboStatus.setItems(statusOptions);
     }
