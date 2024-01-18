@@ -1,7 +1,6 @@
 package edu.icet.crm.controller;
 
 import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import edu.icet.crm.bo.BoFactory;
 import edu.icet.crm.bo.BoType;
@@ -43,7 +42,7 @@ public class EmployeeReportsViewController {
     private JFXTextField txtUserName;
 
     @FXML
-    private JFXPasswordField txtPassword;
+    private JFXTextField txtPassword;
 
     @FXML
     private TableColumn<UsersViewTm, String> colUserId;
@@ -148,7 +147,9 @@ public class EmployeeReportsViewController {
 
         String hashedPassword = hashPassword(password);
 
-        UserDto user = new UserDto(null, userName, hashedPassword,"employee");
+        int lastUserId=usersViewBo.getLastUserId();
+
+        UserDto user = new UserDto(String.format("user%d", ++lastUserId), userName, hashedPassword,"employee");
         boolean result = usersViewBo.addUser(user);
 
         if (result) {

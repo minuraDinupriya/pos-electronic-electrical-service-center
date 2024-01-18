@@ -9,7 +9,8 @@ import edu.icet.crm.dto.UserDto;
 import java.util.List;
 
 public class UserViewBoImpl implements UserViewBo {
-    UsersViewDao usersViewDao= DaoFactory.getInstance().getDao(DaoType.USERS_VIEW_DAO);
+
+    UsersViewDao usersViewDao = DaoFactory.getInstance().getDao(DaoType.USERS_VIEW_DAO);
 
     @Override
     public List<UserDto> getUsers() {
@@ -24,5 +25,14 @@ public class UserViewBoImpl implements UserViewBo {
     @Override
     public boolean deleteUser(String userId) {
         return usersViewDao.deleteUser(userId);
+    }
+
+    @Override
+    public int getLastUserId() {
+        if (usersViewDao.getLastUserId() == null) {
+            return 0;
+        } else {
+            return Integer.parseInt(usersViewDao.getLastUserId().split("[r]")[1]);
+        }
     }
 }

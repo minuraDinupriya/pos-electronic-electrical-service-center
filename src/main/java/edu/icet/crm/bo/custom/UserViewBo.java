@@ -7,4 +7,5 @@ public interface UserViewBo extends SuperBo {
     List<UserDto> getUsers();
     boolean addUser(UserDto userDto);
     boolean deleteUser(String userId);
+    int getLastUserId();
 }

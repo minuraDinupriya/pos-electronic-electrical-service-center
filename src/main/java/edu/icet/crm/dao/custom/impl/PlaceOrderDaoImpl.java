@@ -51,7 +51,7 @@ public class PlaceOrderDaoImpl implements PlaceOrderDao {
 
         try (Session session = HibernateUtil.getSession()) {
             Query<String> query = session.createQuery(hql, String.class);
-            query.setMaxResults(1); // Fetch only the first result
+            query.setMaxResults(1);
 
             List<String> result = query.getResultList();
             return result.isEmpty() ? null : result.get(0);

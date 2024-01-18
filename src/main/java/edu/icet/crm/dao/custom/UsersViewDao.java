@@ -8,5 +8,6 @@ public interface UsersViewDao extends SuperDao {
     List<UserDto> getAllUsers();
     public boolean addUser(UserDto userDto);
     boolean deleteUser(String userId);
+    String getLastUserId();
 
 }
