@@ -17,6 +17,7 @@ public class DaoFactory {
             case CUSTOMER_REPORTS_VIEW_DAO:return (T) new CustomerReportsViewDaoImpl();
             case ORDER_REPORTS_VIEW_DAO:return (T) new OrderReportsViewDaoImpl();
             case USERS_VIEW_DAO:return (T) new UsersViewDaoImpl();
+            case LOGIN_VIEW_DAO:return (T) new LogInViewDaoImpl();
         }
         return null;
     }
