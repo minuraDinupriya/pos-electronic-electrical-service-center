@@ -32,7 +32,7 @@ public class OrdersEntity {
     private String orderStatus;
 
     @Column(name = "total")
-    private String total;
+    private Double total;
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.PERSIST)
     private List<ItemsEntity> items;

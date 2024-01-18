@@ -6,4 +6,5 @@ import java.util.List;
 public interface OrdersViewDao extends SuperDao {
     public List<OrderDto> getOrdersViewDto();
     boolean updateOrderStatus(String orderId, String newStatus);
+    boolean updateOrderTotal(String orderId, double total);
 }

@@ -34,7 +34,6 @@ public class OrdersViewController {
     public TableColumn colOrderDate;
     public TableColumn colNote;
     public TableColumn colCloseBtn;
-    public TableColumn colReturnBtn;
     public Label lblOrderID;
     public JFXComboBox comboStatus;
     public TableView<OrdersViewTm> table;
@@ -62,7 +61,7 @@ public class OrdersViewController {
         colOrderDate.setCellValueFactory(new PropertyValueFactory<>("orderDate"));
         colNote.setCellValueFactory(new PropertyValueFactory<>("note"));
         colCloseBtn.setCellValueFactory(new PropertyValueFactory<>("closeOrderButton"));
-        colReturnBtn.setCellValueFactory(new PropertyValueFactory<>("returnButton"));
+        colTotal.setCellValueFactory(new PropertyValueFactory<>("total"));
 
 
         loadDataToTable();
@@ -73,8 +72,6 @@ public class OrdersViewController {
                 lblOrderID.setText(newValue.getOrderId());
             }
         });
-
-
     }
 
     private void loadDataToTable() {
@@ -85,19 +82,22 @@ public class OrdersViewController {
             for (OrderDto order : ordersList) {
                 JFXButton returnButton = new JFXButton("Return");
                 JFXButton closeOrderButton = new JFXButton("Close Order");
-                closeOrderButton.setOnAction(ActionEvent->{
 
-                });
 
-                tmList.add(new OrdersViewTm(
+                OrdersViewTm ordersViewTm = new OrdersViewTm(
                         order.getOrderId(),
                         order.getStatus(),
                         order.getCustomerId(),
                         order.getOrderDate(),
                         order.getNote(),
-                        returnButton,
-                        closeOrderButton
-                ));
+                        closeOrderButton,
+                        order.getTotal()
+                );
+                closeOrderButton.setOnAction(ActionEvent->{
+                    showTotalInputDialog(ordersViewTm);
+                });
+
+                tmList.add(ordersViewTm);
             }
         }
 
@@ -114,14 +114,14 @@ public class OrdersViewController {
 //    }
 
 
-    @FXML
-    void closeOrderBtnOnAction(ActionEvent actionEvent) {
-        OrdersViewTm selectedOrder = table.getSelectionModel().getSelectedItem();
-        if (selectedOrder != null) {
-            // Show the dialog for entering total value
-            showTotalInputDialog(selectedOrder);
-        }
-    }
+//    @FXML
+//    void closeOrderBtnOnAction(ActionEvent actionEvent) {
+//        OrdersViewTm selectedOrder = table.getSelectionModel().getSelectedItem();
+//        if (selectedOrder != null) {
+//
+//            showTotalInputDialog(selectedOrder);
+//        }
+//    }
 
     private void showTotalInputDialog(OrdersViewTm selectedOrder) {
         Dialog<Double> dialog = new Dialog<>();
@@ -146,10 +146,16 @@ public class OrdersViewController {
 
         dialog.showAndWait().ifPresent(total -> {
             if (total != null) {
+                boolean updateSuccess = ordersViewBo.updateOrderTotal(selectedOrder.getOrderId(), total);
 
-                selectedOrder.setTotal(total+"");
-                table.refresh();
-                showAlert("Total Entered", "Total for the order has been entered successfully.");
+                if (updateSuccess) {
+                    selectedOrder.setTotal(total);
+//                    initialize();
+                    table.refresh();
+                    showAlert("Total Entered", "Total for the order has been entered and saved successfully.");
+                } else {
+                    showAlert("Update Failed", "Failed to update total for the order.");
+                }
             }
         });
     }

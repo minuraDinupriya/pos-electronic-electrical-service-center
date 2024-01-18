@@ -14,7 +14,7 @@ public class OrdersViewDaoImpl implements OrdersViewDao {
     @Override
     public List<OrderDto> getOrdersViewDto() {
         try (Session session = HibernateUtil.getSession()) {
-            String hql = "SELECT NEW edu.icet.crm.dto.OrderDto(o.orderId, o.orderStatus, o.customer.customerId, o.orderDate, o.note) " +
+            String hql = "SELECT NEW edu.icet.crm.dto.OrderDto(o.orderId, o.orderStatus, o.customer.customerId, o.orderDate, o.note, o.total) " +
                     "FROM OrdersEntity o";
             Query<OrderDto> query = session.createQuery(hql, OrderDto.class);
             return query.getResultList();
@@ -40,6 +40,28 @@ public class OrdersViewDaoImpl implements OrdersViewDao {
                 }
             } catch (Exception e) {
 
+                transaction.rollback();
+                e.printStackTrace();
+                return false;
+            }
+        }
+    }
+
+    @Override
+    public boolean updateOrderTotal(String orderId, double total) {
+        try (Session session = HibernateUtil.getSession()) {
+            Transaction transaction = session.beginTransaction();
+
+            try {
+                OrdersEntity ordersEntity = session.get(OrdersEntity.class, orderId);
+                if (ordersEntity != null) {
+                    ordersEntity.setTotal(total);
+                    transaction.commit();
+                    return true;
+                } else {
+                    return false;
+                }
+            } catch (Exception e) {
                 transaction.rollback();
                 e.printStackTrace();
                 return false;

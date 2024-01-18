@@ -22,5 +22,5 @@ public class OrderDto {
         this.note = note;
     }
 
-    private String total;
+    private Double total;
 }

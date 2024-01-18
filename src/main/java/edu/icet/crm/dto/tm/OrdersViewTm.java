@@ -16,18 +16,6 @@ public class OrdersViewTm {
     private String customerId;
     private String orderDate;
     private String note;
-    private JFXButton returnButton;
     private JFXButton closeOrderButton;
-
-    public OrdersViewTm(String orderId, String status, String customerId, String orderDate, String note, JFXButton returnButton, JFXButton closeOrderButton) {
-        this.orderId = orderId;
-        this.status = status;
-        this.customerId = customerId;
-        this.orderDate = orderDate;
-        this.note = note;
-        this.returnButton = returnButton;
-        this.closeOrderButton = closeOrderButton;
-    }
-
-    private String total;
+    private Double total;
 }

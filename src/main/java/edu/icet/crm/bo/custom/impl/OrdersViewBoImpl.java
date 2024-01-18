@@ -17,4 +17,9 @@ public class OrdersViewBoImpl implements OrdersViewBo {
     public boolean updateOrderStatus(String orderId, String newStatus){
         return orderViewDao.updateOrderStatus(orderId,newStatus);
     }
+
+    @Override
+    public boolean updateOrderTotal(String orderId, double total) {
+        return orderViewDao.updateOrderTotal(orderId,total);
+    }
 }
