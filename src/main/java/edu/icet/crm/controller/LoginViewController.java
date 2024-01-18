@@ -54,6 +54,8 @@ public class LoginViewController {
 
                 if ("employee".equals(role)) {
                     loadEmployeeView();
+                } else if ("admin".equals(role)) {
+                    loadAdminView();
                 } else {
                     showAlert("Login Failed", "Invalid role.");
                 }
@@ -63,6 +65,13 @@ public class LoginViewController {
         } else {
             showAlert("Login Failed", "Invalid username or password.");
         }
+    }
+
+    private void loadAdminView() throws IOException {
+        Stage stage = (Stage) pane.getScene().getWindow();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/OwnerView.fxml"));
+        Parent root = loader.load();
+        stage.setScene(new Scene(root));
     }
 
     private void loadEmployeeView() throws IOException {

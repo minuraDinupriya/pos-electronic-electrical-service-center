@@ -92,23 +92,18 @@ public class PlaceOrderViewController {
 
     @FXML
     private void saveBtnOnAction() {
-
-
         if (isEmptyField(txtCustomerName) || isEmptyField(txtContactNumber) || isEmptyField(txtEmail)
                 || isEmptyField(txtItemName) || !(electronicToggleBtn.isSelected() || electricalToggleBtn.isSelected()) ) {
 
             new Alert(Alert.AlertType.WARNING,"Please fill in all required fields and select a category.").show();
         } else {
-
-
-
             RadioButton selectedRadioButton = (RadioButton) category.getSelectedToggle();
             String selectedCategory = selectedRadioButton.getText();
-            System.out.println(selectedCategory);
-
-
-            PlaceOrderTm placeOrderTm = new PlaceOrderTm(txtItemName.getText(), selectedCategory, createDeleteButton());
-
+            PlaceOrderTm placeOrderTm = new PlaceOrderTm(
+                    txtItemName.getText(),
+                    selectedCategory,
+                    createDeleteButton()
+            );
 
             tmList.add(placeOrderTm);
             table.setItems(tmList  );

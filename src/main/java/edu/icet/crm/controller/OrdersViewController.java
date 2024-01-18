@@ -8,19 +8,20 @@ import edu.icet.crm.bo.BoType;
 import edu.icet.crm.bo.custom.OrdersViewBo;
 import edu.icet.crm.dto.OrderDto;
 import edu.icet.crm.dto.tm.OrdersViewTm;
+import edu.icet.crm.dto.tm.PlaceOrderTm;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
+import javafx.util.converter.NumberStringConverter;
 
 import java.io.IOException;
 import java.util.List;
@@ -38,6 +39,7 @@ public class OrdersViewController {
     public JFXComboBox comboStatus;
     public TableView<OrdersViewTm> table;
     public JFXTextField txtSearch;
+    public TableColumn colTotal;
     @FXML
     private BorderPane pane;
 
@@ -72,8 +74,7 @@ public class OrdersViewController {
             }
         });
 
-        ObservableList<String> statusOptions = FXCollections.observableArrayList("PENDING", "PROCESSING", "COMPLETED");
-        comboStatus.setItems(statusOptions);
+
     }
 
     private void loadDataToTable() {
@@ -84,6 +85,9 @@ public class OrdersViewController {
             for (OrderDto order : ordersList) {
                 JFXButton returnButton = new JFXButton("Return");
                 JFXButton closeOrderButton = new JFXButton("Close Order");
+                closeOrderButton.setOnAction(ActionEvent->{
+
+                });
 
                 tmList.add(new OrdersViewTm(
                         order.getOrderId(),
@@ -99,6 +103,57 @@ public class OrdersViewController {
 
         table.setItems(tmList);
     }
+
+//    private JFXButton createCloseOrderButton() {
+//        JFXButton deleteButton = new JFXButton("Close Order");
+//        deleteButton.setOnAction(event -> {
+//            PlaceOrderTm selectedItem = table.getSelectionModel().getSelectedItem();
+//            table.getItems().remove(selectedItem);
+//        });
+//        return deleteButton;
+//    }
+
+
+    @FXML
+    void closeOrderBtnOnAction(ActionEvent actionEvent) {
+        OrdersViewTm selectedOrder = table.getSelectionModel().getSelectedItem();
+        if (selectedOrder != null) {
+            // Show the dialog for entering total value
+            showTotalInputDialog(selectedOrder);
+        }
+    }
+
+    private void showTotalInputDialog(OrdersViewTm selectedOrder) {
+        Dialog<Double> dialog = new Dialog<>();
+        dialog.setTitle("Enter Total Value");
+        dialog.setHeaderText("Enter the total value for the order:");
+
+        TextField totalTextField = new TextField();
+        totalTextField.setPromptText("Total");
+        dialog.getDialogPane().setContent(new HBox(totalTextField));
+        dialog.getDialogPane().getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
+
+        dialog.setResultConverter(buttonType -> {
+            if (buttonType == ButtonType.OK) {
+                try {
+                    return Double.parseDouble(totalTextField.getText());
+                } catch (NumberFormatException e) {
+                    showAlert("Invalid Input", "Please enter a valid number for the total.");
+                }
+            }
+            return null;
+        });
+
+        dialog.showAndWait().ifPresent(total -> {
+            if (total != null) {
+
+                selectedOrder.setTotal(total+"");
+                table.refresh();
+                showAlert("Total Entered", "Total for the order has been entered successfully.");
+            }
+        });
+    }
+
 
     @FXML
     void backBtnOnAction(ActionEvent event) throws IOException {

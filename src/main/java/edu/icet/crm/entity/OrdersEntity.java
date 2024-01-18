@@ -11,7 +11,7 @@ import java.util.List;
 @Getter
 @NoArgsConstructor
 @Entity
-@Table(name = "Orders")
+@Table(name = "orders")
 public class OrdersEntity {
 
     @Id
@@ -30,6 +30,9 @@ public class OrdersEntity {
 
     @Column(name = "order_status")
     private String orderStatus;
+
+    @Column(name = "total")
+    private String total;
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.PERSIST)
     private List<ItemsEntity> items;

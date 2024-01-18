@@ -11,7 +11,7 @@ import java.util.List;
 @Getter
 @NoArgsConstructor
 @Entity
-@Table(name = "Customers")
+@Table(name = "customers")
 public class CustomerEntity {
 
     @Id
