@@ -18,6 +18,7 @@ public class BoFactory {
             case ITEMS_VIEW_BO:return (T)new ItemsViewBoImpl();
             case CUSTOMER_REPORTS_VIEW_BO:return (T)new CustomerReportsViewBoImpl();
             case ORDER_REPORTS_VIEW_BO:return (T)new OrderReportsViewBoImpl();
+            case USERS_VIEW_BO:return (T)new UserViewBoImpl();
         }
 
         return null;

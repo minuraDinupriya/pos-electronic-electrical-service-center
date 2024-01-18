@@ -34,7 +34,7 @@
                   <TableView fx:id="tblUsers" layoutX="25.0" layoutY="95.0" prefHeight="608.0" prefWidth="1255.0">
                     <columns>
                       <TableColumn fx:id="colUserId" prefWidth="194.0" text="User Id" />
-                      <TableColumn fx:id="colEmailAdress" prefWidth="547.0" text="User Name (Email Address)" />
+                      <TableColumn fx:id="colEmailAddress" prefWidth="547.0" text="User Name (Email Address)" />
                         <TableColumn fx:id="colPassword" prefWidth="362.0" text="Password" />
                         <TableColumn fx:id="colOption" prefWidth="151.0" text="Option" />
                     </columns>
