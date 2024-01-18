@@ -50,8 +50,13 @@ public class LoginViewController {
             String storedPassword = userDto.getPassword();
 
             if (storedPassword.equals(hashPassword(enteredPassword))) {
-                Stage stage = (Stage) pane.getScene().getWindow();
-                stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/OwnerView.fxml"))));
+                String role = userDto.getRole();
+
+                if ("employee".equals(role)) {
+                    loadEmployeeView();
+                } else {
+                    showAlert("Login Failed", "Invalid role.");
+                }
             } else {
                 showAlert("Login Failed", "Invalid username or password.");
             }
@@ -59,6 +64,14 @@ public class LoginViewController {
             showAlert("Login Failed", "Invalid username or password.");
         }
     }
+
+    private void loadEmployeeView() throws IOException {
+        Stage stage = (Stage) pane.getScene().getWindow();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/EmployeeView.fxml"));
+        Parent root = loader.load();
+        stage.setScene(new Scene(root));
+    }
+
 
     private void showAlert(String title, String content) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
