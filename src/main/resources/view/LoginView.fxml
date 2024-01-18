@@ -12,17 +12,17 @@
    <center>
       <StackPane maxHeight="280.0" maxWidth="432.0" prefHeight="280.0" prefWidth="432.0" style="-fx-background-color: #fcdb03;" BorderPane.alignment="CENTER">
          <children>
-            <AnchorPane prefHeight="279.0" prefWidth="440.0">
+            <AnchorPane fx:id="pane" prefHeight="279.0" prefWidth="440.0">
                <children>
                   <Label alignment="CENTER" contentDisplay="CENTER" layoutX="91.0" layoutY="14.0" prefHeight="40.0" prefWidth="250.0" text="Log in to POS" textFill="DARKBLUE">
                      <font>
                         <Font name="System Bold" size="27.0" />
                      </font>
                   </Label>
-                  <JFXTextField fx:id="txtEmail" layoutX="46.0" layoutY="90.0" onAction="#txtEmailOnAction" prefHeight="31.0" prefWidth="338.0" promptText="username (email address)" />
-                  <JFXTextField fx:id="txtPassword" layoutX="46.0" layoutY="149.0" onAction="#txtPasswordOnAction" prefHeight="31.0" prefWidth="340.0" promptText="password" />
-                  <JFXButton fx:id="btnSubmit" layoutX="153.0" layoutY="225.0" onAction="#btnSubmitOnAction" prefHeight="31.0" prefWidth="147.0" style="-fx-background-color: #00008B;" text="Submit" textFill="WHITE" />
-                  <JFXButton layoutX="226.0" layoutY="180.0" prefHeight="31.0" prefWidth="171.0" text="forgotten password?" textFill="DARKBLUE" />
+                  <JFXTextField fx:id="txtEmail" layoutX="46.0" layoutY="90.0" prefHeight="31.0" prefWidth="338.0" promptText="username (email address)" />
+                  <JFXTextField fx:id="txtPassword" layoutX="46.0" layoutY="149.0" prefHeight="31.0" prefWidth="340.0" promptText="password" />
+                  <JFXButton layoutX="153.0" layoutY="225.0" onAction="#btnSubmitOnAction" prefHeight="31.0" prefWidth="147.0" style="-fx-background-color: #00008B;" text="Submit" textFill="WHITE" />
+                  <JFXButton layoutX="226.0" layoutY="180.0" onAction="#forgottenPasswordBtnOnAction" prefHeight="31.0" prefWidth="171.0" text="forgotten password?" textFill="DARKBLUE" />
                </children>
             </AnchorPane>
          </children>
