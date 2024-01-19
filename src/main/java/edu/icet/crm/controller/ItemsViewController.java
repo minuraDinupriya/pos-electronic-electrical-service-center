@@ -81,7 +81,6 @@ public class ItemsViewController {
                             setStyle("");
                     }
 
-
                     if ("PENDING".equals(status)) {
                         ItemsViewTm item = getTableView().getItems().get(getIndex());
 

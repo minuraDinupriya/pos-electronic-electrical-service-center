@@ -87,7 +87,7 @@
                             <outputFile>shade\${project.artifactId}.jar</outputFile>
                             <transformers>
                                 <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                    <mainClass>Main</mainClass>
+                                    <mainClass>edu.icet.crm.AppInitializer</mainClass>
                                 </transformer>
                             </transformers>
                         </configuration>
