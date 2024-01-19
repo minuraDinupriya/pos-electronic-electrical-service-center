@@ -14,10 +14,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
@@ -53,11 +50,42 @@ public class ItemsViewController {
     public void initialize() {
 
         colItemId.setCellValueFactory(new PropertyValueFactory<>("itemId"));
-        colStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
+//        colStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
         colCategory.setCellValueFactory(new PropertyValueFactory<>("category"));
         colName.setCellValueFactory(new PropertyValueFactory<>("name"));
         colOrderId.setCellValueFactory(new PropertyValueFactory<>("orderId"));
         colDelete.setCellValueFactory(new PropertyValueFactory<>("deleteButton"));
+
+        colStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
+
+        colStatus.setCellFactory(column -> new TableCell<ItemsViewTm, String>() {
+            @Override
+            protected void updateItem(String status, boolean empty) {
+                super.updateItem(status, empty);
+
+                if (status == null || empty) {
+                    setText(null);
+                    setStyle("");
+                } else {
+                    setText(status);
+
+                    switch (status) {
+                        case "PENDING":
+                            setStyle("-fx-background-color: orange;");
+                            break;
+                        case "PROCESSING":
+                            setStyle("-fx-background-color: yellow;");
+                            break;
+                        case "COMPLETED":
+                            setStyle("-fx-background-color: green;");
+                            break;
+                        default:
+                            setStyle("");
+                    }
+                }
+            }
+        });
+
 
         populateTable();
 

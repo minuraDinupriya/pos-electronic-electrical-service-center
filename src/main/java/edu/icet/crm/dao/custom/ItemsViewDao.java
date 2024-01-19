@@ -14,5 +14,6 @@ public interface ItemsViewDao extends SuperDao {
     public String getOrderIdByItemId(String itemId);
     int getOrderItemCountByStatus(String orderId, String status);
     int getTotalItemCountByOrderId(String orderId);
+    String getOrderDateByItemId(String itemId);
 }
 

@@ -9,6 +9,8 @@ import edu.icet.crm.dto.ItemDto;
 import edu.icet.crm.entity.ItemsEntity;
 import edu.icet.crm.entity.OrdersEntity;
 
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 import javax.mail.*;
@@ -106,5 +108,22 @@ public class ItemsViewBoImpl implements ItemsViewBo {
         } catch (MessagingException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public boolean isItemPendingForMoreThan10Days(String itemId) {
+        String orderDateStr = itemsViewDao.getOrderDateByItemId(itemId);
+
+        if (orderDateStr != null) {
+            //format "yyyy-MM-dd"
+            LocalDate orderDate = LocalDate.parse(orderDateStr);
+            LocalDate currentDate = LocalDate.now();
+
+            long daysBetween = ChronoUnit.DAYS.between(orderDate, currentDate);
+
+            return daysBetween > 10;
+        }
+
+        return false;
     }
 }

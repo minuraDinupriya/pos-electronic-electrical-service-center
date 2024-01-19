@@ -2,8 +2,6 @@ package edu.icet.crm.dao.custom.impl;
 
 import edu.icet.crm.dao.custom.ItemsViewDao;
 import edu.icet.crm.dao.util.HibernateUtil;
-import edu.icet.crm.dto.ItemDto;
-import edu.icet.crm.entity.CustomerEntity;
 import edu.icet.crm.entity.ItemsEntity;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -110,7 +108,19 @@ public class ItemsViewDaoImpl implements ItemsViewDao {
             return Math.toIntExact(query.uniqueResult());
         } catch (Exception e) {
             e.printStackTrace();
-            return 0; // Handle exception appropriately in your application
+            return 0;
+        }
+    }
+
+    @Override
+    public String getOrderDateByItemId(String itemId) {
+        try (Session session = HibernateUtil.getSession()) {
+            Query<String> query = session.createQuery("SELECT order.orderDate FROM ItemsEntity WHERE itemId = :itemId", String.class);
+            query.setParameter("itemId", itemId);
+            return query.uniqueResult();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
         }
     }
 

@@ -9,4 +9,5 @@ public interface ItemsViewBo extends SuperBo {
     List<ItemDto> getAllItems();
     boolean deleteItem(String itemId);
     boolean updateItemStatus(String orderId, String newStatus);
+    boolean isItemPendingForMoreThan10Days(String itemId);
 }
