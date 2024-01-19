@@ -50,8 +50,6 @@ public class OrdersViewController {
 
     private OrdersViewBo ordersViewBo= BoFactory.getInstance().getBo(BoType.ORDERS_VIEW_BO);
 
-
-
     @FXML
     private void initialize() {
 
