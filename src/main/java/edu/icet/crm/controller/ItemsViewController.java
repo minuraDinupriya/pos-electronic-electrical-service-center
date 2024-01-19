@@ -50,12 +50,10 @@ public class ItemsViewController {
     public void initialize() {
 
         colItemId.setCellValueFactory(new PropertyValueFactory<>("itemId"));
-//        colStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
         colCategory.setCellValueFactory(new PropertyValueFactory<>("category"));
         colName.setCellValueFactory(new PropertyValueFactory<>("name"));
         colOrderId.setCellValueFactory(new PropertyValueFactory<>("orderId"));
         colDelete.setCellValueFactory(new PropertyValueFactory<>("deleteButton"));
-
         colStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
 
         colStatus.setCellFactory(column -> new TableCell<ItemsViewTm, String>() {
@@ -82,10 +80,18 @@ public class ItemsViewController {
                         default:
                             setStyle("");
                     }
+
+
+                    if ("PENDING".equals(status)) {
+                        ItemsViewTm item = getTableView().getItems().get(getIndex());
+
+                        if (isItemPendingForMoreThan10Days(item.getItemId())) {
+                            setStyle("-fx-background-color: red;");
+                        }
+                    }
                 }
             }
         });
-
 
         populateTable();
 
@@ -98,6 +104,12 @@ public class ItemsViewController {
         ObservableList<String> statusOptions = FXCollections.observableArrayList("PENDING", "PROCESSING", "COMPLETED");
         comboStatus.setItems(statusOptions);
     }
+
+    // Add this method to check if an item is pending for more than 10 days
+    private boolean isItemPendingForMoreThan10Days(String itemId) {
+        return itemsViewBo.isItemPendingForMoreThan10Days(itemId);
+    }
+
 
     private void populateTable() {
 

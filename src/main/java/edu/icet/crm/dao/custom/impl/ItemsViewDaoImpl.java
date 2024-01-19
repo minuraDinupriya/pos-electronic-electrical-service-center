@@ -117,6 +117,7 @@ public class ItemsViewDaoImpl implements ItemsViewDao {
         try (Session session = HibernateUtil.getSession()) {
             Query<String> query = session.createQuery("SELECT order.orderDate FROM ItemsEntity WHERE itemId = :itemId", String.class);
             query.setParameter("itemId", itemId);
+            System.out.println(query.uniqueResult());
             return query.uniqueResult();
         } catch (Exception e) {
             e.printStackTrace();

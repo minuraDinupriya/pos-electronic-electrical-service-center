@@ -117,6 +117,7 @@ public class ItemsViewBoImpl implements ItemsViewBo {
         if (orderDateStr != null) {
             //format "yyyy-MM-dd"
             LocalDate orderDate = LocalDate.parse(orderDateStr);
+            System.out.println(orderDate);
             LocalDate currentDate = LocalDate.now();
 
             long daysBetween = ChronoUnit.DAYS.between(orderDate, currentDate);
