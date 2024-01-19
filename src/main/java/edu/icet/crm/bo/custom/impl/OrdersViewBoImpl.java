@@ -5,21 +5,34 @@ import edu.icet.crm.dao.DaoFactory;
 import edu.icet.crm.dao.custom.OrdersViewDao;
 import edu.icet.crm.dao.util.DaoType;
 import edu.icet.crm.dto.OrderDto;
+import edu.icet.crm.entity.OrdersEntity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class OrdersViewBoImpl implements OrdersViewBo {
     OrdersViewDao orderViewDao= DaoFactory.getInstance().getDao(DaoType.ORDERS_VIEW_DAO);
     @Override
     public List<OrderDto> getOrdersViewDto() {
-        return orderViewDao.getOrdersViewDto();
+        List<OrderDto> orderDtoList=new ArrayList<>();
+        for (OrdersEntity ordersEntity:orderViewDao.getOrdersViewDto()){
+            orderDtoList.add(new OrderDto(
+                    ordersEntity.getOrderId(),
+                    ordersEntity.getOrderStatus(),
+                    ordersEntity.getCustomer().getCustomerId(),
+                    ordersEntity.getOrderDate(),
+                    ordersEntity.getNote(),
+                    ordersEntity.getTotal()
+            ));
+        }
+        return orderDtoList;
     }
-    public boolean updateOrderStatus(String orderId, String newStatus){
-        return orderViewDao.updateOrderStatus(orderId,newStatus);
+    public boolean updateOrder(OrderDto updatedDto){
+        return orderViewDao.updateOrder(new OrdersEntity(
+                updatedDto.getOrderId(),
+                updatedDto.getStatus(),
+                updatedDto.getTotal()
+        ));
     }
 
-    @Override
-    public boolean updateOrderTotal(String orderId, double total) {
-        return orderViewDao.updateOrderTotal(orderId,total);
-    }
 }

@@ -18,4 +18,5 @@ public class OrdersViewTm {
     private String note;
     private JFXButton closeOrderButton;
     private Double total;
+    private JFXButton returnOrderButton;
 }

@@ -39,6 +39,7 @@ public class OrdersViewController {
     public TableView<OrdersViewTm> table;
     public JFXTextField txtSearch;
     public TableColumn colTotal;
+    public TableColumn colReturnOrder;
     @FXML
     private BorderPane pane;
 
@@ -60,6 +61,7 @@ public class OrdersViewController {
         colNote.setCellValueFactory(new PropertyValueFactory<>("note"));
         colCloseBtn.setCellValueFactory(new PropertyValueFactory<>("closeOrderButton"));
         colTotal.setCellValueFactory(new PropertyValueFactory<>("total"));
+        colReturnOrder.setCellValueFactory(new PropertyValueFactory<>("returnOrderButton"));
 
 
         loadDataToTable();
@@ -70,6 +72,8 @@ public class OrdersViewController {
                 lblOrderID.setText(newValue.getOrderId());
             }
         });
+        ObservableList<String> statusOptions = FXCollections.observableArrayList("PENDING", "PROCESSING", "COMPLETED");
+        comboStatus.setItems(statusOptions);
     }
 
     private void loadDataToTable() {
@@ -89,7 +93,8 @@ public class OrdersViewController {
                         order.getOrderDate(),
                         order.getNote(),
                         closeOrderButton,
-                        order.getTotal()
+                        order.getTotal(),
+                        returnButton
                 );
                 closeOrderButton.setOnAction(ActionEvent->{
                     showTotalInputDialog(ordersViewTm);
@@ -101,25 +106,6 @@ public class OrdersViewController {
 
         table.setItems(tmList);
     }
-
-//    private JFXButton createCloseOrderButton() {
-//        JFXButton deleteButton = new JFXButton("Close Order");
-//        deleteButton.setOnAction(event -> {
-//            PlaceOrderTm selectedItem = table.getSelectionModel().getSelectedItem();
-//            table.getItems().remove(selectedItem);
-//        });
-//        return deleteButton;
-//    }
-
-
-//    @FXML
-//    void closeOrderBtnOnAction(ActionEvent actionEvent) {
-//        OrdersViewTm selectedOrder = table.getSelectionModel().getSelectedItem();
-//        if (selectedOrder != null) {
-//
-//            showTotalInputDialog(selectedOrder);
-//        }
-//    }
 
     private void showTotalInputDialog(OrdersViewTm selectedOrder) {
         Dialog<Double> dialog = new Dialog<>();
@@ -144,11 +130,15 @@ public class OrdersViewController {
 
         dialog.showAndWait().ifPresent(total -> {
             if (total != null) {
-                boolean updateSuccess = ordersViewBo.updateOrderTotal(selectedOrder.getOrderId(), total);
+
+                boolean updateSuccess = ordersViewBo.updateOrder(new OrderDto(
+                        selectedOrder.getOrderId(),
+                        selectedOrder.getStatus(),
+                        total
+                ));
 
                 if (updateSuccess) {
                     selectedOrder.setTotal(total);
-//                    initialize();
                     table.refresh();
                     showAlert("Total Entered", "Total for the order has been entered and saved successfully.");
                 } else {
@@ -177,7 +167,11 @@ public class OrdersViewController {
         OrdersViewTm selectedOrder = table.getSelectionModel().getSelectedItem();
         if (selectedOrder != null) {
             String selectedStatus = comboStatus.getValue().toString();
-            boolean updateSuccess = ordersViewBo.updateOrderStatus(selectedOrder.getOrderId(), selectedStatus);
+            boolean updateSuccess = ordersViewBo.updateOrder(new OrderDto(
+                    selectedOrder.getOrderId(),
+                    selectedStatus,
+                    selectedOrder.getTotal()
+            ));
 
             if (updateSuccess) {
 

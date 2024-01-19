@@ -43,4 +43,10 @@ public class OrdersEntity {
         this.note = note;
         this.orderStatus=orderStatus;
     }
+
+    public OrdersEntity(String orderId, String orderStatus, Double total) {
+        this.orderId = orderId;
+        this.orderStatus = orderStatus;
+        this.total = total;
+    }
 }

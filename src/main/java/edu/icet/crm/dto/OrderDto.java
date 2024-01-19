@@ -13,6 +13,7 @@ public class OrderDto {
     private String customerId;
     private String orderDate;
     private String note;
+    private Double total;
 
     public OrderDto(String orderId, String status, String customerId, String orderDate, String note) {
         this.orderId = orderId;
@@ -22,5 +23,9 @@ public class OrderDto {
         this.note = note;
     }
 
-    private Double total;
+    public OrderDto(String orderId, String status, Double total) {
+        this.orderId = orderId;
+        this.status = status;
+        this.total = total;
+    }
 }
