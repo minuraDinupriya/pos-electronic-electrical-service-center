@@ -3,6 +3,7 @@ package edu.icet.crm.dao.custom.impl;
 import edu.icet.crm.dao.custom.ItemsViewDao;
 import edu.icet.crm.dao.util.HibernateUtil;
 import edu.icet.crm.dto.ItemDto;
+import edu.icet.crm.entity.CustomerEntity;
 import edu.icet.crm.entity.ItemsEntity;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -11,13 +12,13 @@ import org.hibernate.query.Query;
 import java.util.List;
 
 public class ItemsViewDaoImpl implements ItemsViewDao {
-
-    public List<ItemDto> getAllItems() {
+    @Override
+    public List<ItemsEntity> getAllItems() {
         try (Session session = HibernateUtil.getSession()) {
-            String hql = "SELECT new edu.icet.crm.dto.ItemDto(i.itemId, i.status, i.category, i.name, i.order.orderId) " +
-                    "FROM ItemsEntity i";
-            Query<ItemDto> query = session.createQuery(hql, ItemDto.class);
-            return query.list();
+            Query query = session.createQuery("FROM ItemsEntity ");
+            List<ItemsEntity> list = query.list();
+            session.close();
+            return list;
         } catch (Exception e) {
             e.printStackTrace();
             return null;
@@ -67,4 +68,50 @@ public class ItemsViewDaoImpl implements ItemsViewDao {
             }
         }
     }
+
+    @Override
+    public String getCustomerEmailByOrderId(String orderId) {
+        try (Session session = HibernateUtil.getSession()) {
+            Query<String> query = session.createQuery("SELECT o.customer.emailAddress FROM OrdersEntity o WHERE o.orderId = :orderId", String.class);
+            query.setParameter("orderId", orderId);
+            return query.uniqueResult();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public String getOrderIdByItemId(String itemId) {
+        try (Session session = HibernateUtil.getSession()) {
+            Query<String> query = session.createQuery("SELECT order.orderId FROM ItemsEntity WHERE itemId = :itemId", String.class);
+            query.setParameter("itemId", itemId);
+            return query.uniqueResult();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public int getOrderItemCountByStatus(String orderId, String status) {
+        try (Session session = HibernateUtil.getSession()) {
+            Query<Long> query = session.createQuery("SELECT COUNT(*) FROM ItemsEntity WHERE order.orderId = :orderId AND status = :status", Long.class);
+            query.setParameter("orderId", orderId);
+            query.setParameter("status", status);
+            return Math.toIntExact(query.uniqueResult());
+        }
+    }
+
+    public int getTotalItemCountByOrderId(String orderId) {
+        try (Session session = HibernateUtil.getSession()) {
+            Query<Long> query = session.createQuery(
+                    "SELECT COUNT(*) FROM ItemsEntity WHERE order.orderId = :orderId", Long.class);
+            query.setParameter("orderId", orderId);
+            return Math.toIntExact(query.uniqueResult());
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 0; // Handle exception appropriately in your application
+        }
+    }
+
 }

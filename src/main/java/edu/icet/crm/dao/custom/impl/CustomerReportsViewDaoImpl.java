@@ -13,18 +13,6 @@ import org.hibernate.query.Query;
 import java.util.List;
 
 public class CustomerReportsViewDaoImpl implements CustomerReportsViewDao {
-//    @Override
-//    public List<CustomerDto> getAllCustomers() {
-//        try (Session session=HibernateUtil.getSession()) {
-//            String hql = "SELECT new edu.icet.crm.dto.CustomerDto(c.customerId, c.customerName, c.contactNumber, c.emailAddress) " +
-//                    "FROM CustomerEntity c";
-//            Query<CustomerDto> query = session.createQuery(hql, CustomerDto.class);
-//            return query.list();
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            return null;
-//        }
-//    }
 
     @Override
     public List<CustomerEntity> getAllCustomers() {

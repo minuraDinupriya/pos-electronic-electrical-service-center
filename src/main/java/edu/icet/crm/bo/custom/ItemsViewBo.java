@@ -6,7 +6,7 @@ import edu.icet.crm.dto.ItemDto;
 import java.util.List;
 
 public interface ItemsViewBo extends SuperBo {
-    public List<ItemDto> getAllItems();
-    public boolean deleteItem(String itemId);
-    public boolean updateItemStatus(String orderId, String newStatus);
+    List<ItemDto> getAllItems();
+    boolean deleteItem(String itemId);
+    boolean updateItemStatus(String orderId, String newStatus);
 }
