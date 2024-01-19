@@ -5,6 +5,7 @@ import edu.icet.crm.dao.custom.CustomerReportsViewDao;
 import edu.icet.crm.dao.util.HibernateUtil;
 import edu.icet.crm.dto.CustomerDto;
 import edu.icet.crm.entity.CustomerEntity;
+import edu.icet.crm.entity.OrdersEntity;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
@@ -12,13 +13,26 @@ import org.hibernate.query.Query;
 import java.util.List;
 
 public class CustomerReportsViewDaoImpl implements CustomerReportsViewDao {
+//    @Override
+//    public List<CustomerDto> getAllCustomers() {
+//        try (Session session=HibernateUtil.getSession()) {
+//            String hql = "SELECT new edu.icet.crm.dto.CustomerDto(c.customerId, c.customerName, c.contactNumber, c.emailAddress) " +
+//                    "FROM CustomerEntity c";
+//            Query<CustomerDto> query = session.createQuery(hql, CustomerDto.class);
+//            return query.list();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            return null;
+//        }
+//    }
+
     @Override
-    public List<CustomerDto> getAllCustomers() {
-        try (Session session=HibernateUtil.getSession()) {
-            String hql = "SELECT new edu.icet.crm.dto.CustomerDto(c.customerId, c.customerName, c.contactNumber, c.emailAddress) " +
-                    "FROM CustomerEntity c";
-            Query<CustomerDto> query = session.createQuery(hql, CustomerDto.class);
-            return query.list();
+    public List<CustomerEntity> getAllCustomers() {
+        try (Session session = HibernateUtil.getSession()) {
+            Query query = session.createQuery("FROM CustomerEntity");
+            List<CustomerEntity> list = query.list();
+            session.close();
+            return list;
         } catch (Exception e) {
             e.printStackTrace();
             return null;

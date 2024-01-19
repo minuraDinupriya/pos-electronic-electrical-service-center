@@ -94,7 +94,6 @@ public class OrdersViewController {
                         returnButton
                 );
 
-                // Disable the closeOrderButton if the order status is CLOSED
                 if ("CLOSED".equals(order.getStatus())) {
                     closeOrderButton.setDisable(true);
                 }
