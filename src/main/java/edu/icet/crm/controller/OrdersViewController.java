@@ -63,9 +63,7 @@ public class OrdersViewController {
         colTotal.setCellValueFactory(new PropertyValueFactory<>("total"));
         colReturnOrder.setCellValueFactory(new PropertyValueFactory<>("returnOrderButton"));
 
-
         loadDataToTable();
-
 
         table.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
@@ -85,7 +83,6 @@ public class OrdersViewController {
                 JFXButton returnButton = new JFXButton("Return");
                 JFXButton closeOrderButton = new JFXButton("Close Order");
 
-
                 OrdersViewTm ordersViewTm = new OrdersViewTm(
                         order.getOrderId(),
                         order.getStatus(),
@@ -96,7 +93,13 @@ public class OrdersViewController {
                         order.getTotal(),
                         returnButton
                 );
-                closeOrderButton.setOnAction(ActionEvent->{
+
+                // Disable the closeOrderButton if the order status is CLOSED
+                if ("CLOSED".equals(order.getStatus())) {
+                    closeOrderButton.setDisable(true);
+                }
+
+                closeOrderButton.setOnAction(ActionEvent -> {
                     showTotalInputDialog(ordersViewTm);
                 });
 
@@ -133,12 +136,14 @@ public class OrdersViewController {
 
                 boolean updateSuccess = ordersViewBo.updateOrder(new OrderDto(
                         selectedOrder.getOrderId(),
-                        selectedOrder.getStatus(),
+                        "CLOSED",
                         total
                 ));
 
                 if (updateSuccess) {
+                    selectedOrder.setStatus("CLOSED");
                     selectedOrder.setTotal(total);
+                    selectedOrder.getCloseOrderButton().setDisable(true);
                     table.refresh();
                     showAlert("Total Entered", "Total for the order has been entered and saved successfully.");
                 } else {

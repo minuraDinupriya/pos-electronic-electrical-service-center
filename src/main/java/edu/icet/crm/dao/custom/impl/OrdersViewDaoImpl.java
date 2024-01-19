@@ -14,7 +14,7 @@ public class OrdersViewDaoImpl implements OrdersViewDao {
     @Override
     public List<OrdersEntity> getOrdersViewDto() {
         try (Session session = HibernateUtil.getSession()) {
-            Query query = session.createQuery("FROM OrdersEntity ");
+            Query query = session.createQuery("FROM OrdersEntity");
             List<OrdersEntity> list = query.list();
             session.close();
             return list;
