@@ -8,6 +8,7 @@ import lombok.*;
 @Getter
 @Setter
 public class PartDto {
+    private String orderId;
     private String itemId;
     private Long partId;
     private String name;
@@ -15,7 +16,8 @@ public class PartDto {
     private double price;
     private double total;
 
-    public PartDto(String itemId, String name, int quantity, double price) {
+    public PartDto(String orderId, String itemId, String name, int quantity, double price) {
+        this.orderId = orderId;
         this.itemId = itemId;
         this.name = name;
         this.quantity = quantity;

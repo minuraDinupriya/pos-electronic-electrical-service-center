@@ -31,7 +31,7 @@
             <children>
                 <AnchorPane prefHeight="647.0" prefWidth="1029.0">
                <children>
-                  <JFXTextField layoutX="16.0" layoutY="30.0" prefHeight="31.0" prefWidth="326.0" promptText="Search Item" />
+                  <JFXTextField fx:id="txtSearch" layoutX="16.0" layoutY="30.0" prefHeight="31.0" prefWidth="326.0" promptText="Search Item" />
                   <TableView fx:id="tblItems" layoutX="16.0" layoutY="138.0" prefHeight="550.0" prefWidth="1226.0">
                     <columns>
                       <TableColumn fx:id="colItemId" prefWidth="182.00003051757812" text="Item ID" />
@@ -48,11 +48,12 @@
                      </font>
                   </Label>
                   <JFXComboBox fx:id="comboStatus" layoutX="145.0" layoutY="81.0" onAction="#statusComboOnAction" prefHeight="31.0" prefWidth="177.0" />
-                  <JFXButton layoutX="352.0" layoutY="81.0" onAction="#updateBtnOnAction" prefHeight="31.0" prefWidth="133.0" text="Update " />
-                  <JFXTextField fx:id="txtPartName" layoutX="566.0" layoutY="30.0" prefHeight="31.0" prefWidth="226.0" promptText="enter the part name" />
-                  <JFXTextField fx:id="txtPartPrice" layoutX="844.0" layoutY="30.0" prefHeight="31.0" prefWidth="226.0" promptText="enter the part price" />
-                  <JFXTextField fx:id="txtPartQty" layoutX="566.0" layoutY="81.0" prefHeight="31.0" prefWidth="226.0" promptText="enter the part quantity" />
-                  <JFXButton buttonType="RAISED" layoutX="844.0" layoutY="81.0" onAction="#addPartBtnOnAction" prefHeight="31.0" prefWidth="227.0" style="-fx-background-color: #40E0D0;" text="Add Part" />
+                  <JFXButton buttonType="RAISED" layoutX="352.0" layoutY="81.0" onAction="#updateBtnOnAction" prefHeight="31.0" prefWidth="133.0" style="-fx-background-color: #40E0D0;" text="Update " />
+                  <JFXTextField fx:id="txtPartName" layoutX="542.0" layoutY="30.0" prefHeight="31.0" prefWidth="226.0" promptText="enter the part name" />
+                  <JFXTextField fx:id="txtPartPrice" layoutX="820.0" layoutY="30.0" prefHeight="31.0" prefWidth="226.0" promptText="enter the part price" />
+                  <JFXTextField fx:id="txtPartQty" layoutX="542.0" layoutY="81.0" prefHeight="31.0" prefWidth="226.0" promptText="enter the part quantity" />
+                  <JFXButton buttonType="RAISED" layoutX="820.0" layoutY="81.0" onAction="#addPartBtnOnAction" prefHeight="31.0" prefWidth="226.0" style="-fx-background-color: #40E0D0;" text="Add Part" />
+                  <JFXButton buttonType="RAISED" layoutX="1068.0" layoutY="81.0" onAction="#clearBtnOnAction" prefHeight="31.0" prefWidth="146.0" style="-fx-background-color: red;" text="Clear" />
                </children></AnchorPane>
             </children>
         </StackPane>

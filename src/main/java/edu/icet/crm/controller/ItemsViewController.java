@@ -37,6 +37,7 @@ public class ItemsViewController {
     public JFXTextField txtPartName;
     public JFXTextField txtPartPrice;
     public JFXTextField txtPartQty;
+    public JFXTextField txtSearch;
     @FXML
     private BorderPane pane;
 
@@ -49,7 +50,7 @@ public class ItemsViewController {
     ItemsViewBo itemsViewBo= BoFactory.getInstance().getBo(BoType.ITEMS_VIEW_BO);
 
     private ObservableList<ItemsViewTm> itemsData = FXCollections.observableArrayList();
-
+    private String orderId="";
 
     @FXML
     public void initialize() {
@@ -102,6 +103,7 @@ public class ItemsViewController {
         tblItems.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
                 lblOrderID.setText(newValue.getItemId());
+                orderId=newValue.getOrderId();
             }
         });
 
@@ -109,7 +111,6 @@ public class ItemsViewController {
         comboStatus.setItems(statusOptions);
     }
 
-    // Add this method to check if an item is pending for more than 10 days
     private boolean isItemPendingForMoreThan10Days(String itemId) {
         return itemsViewBo.isItemPendingForMoreThan10Days(itemId);
     }
@@ -218,10 +219,19 @@ public class ItemsViewController {
 
     public void addPartBtnOnAction(ActionEvent actionEvent) {
         itemsViewBo.savePart(new PartDto(
+                orderId,
                 lblOrderID.getText(),
                 txtPartName.getText(),
                 Integer.parseInt(txtPartQty.getText()),
                 Double.parseDouble(txtPartPrice.getText())
         ));
+    }
+
+    public void clearBtnOnAction(ActionEvent actionEvent) {
+        txtSearch.clear();
+        lblOrderID.setText("ItemId");
+        txtPartName.clear();
+        txtPartPrice.clear();
+        txtPartQty.clear();
     }
 }

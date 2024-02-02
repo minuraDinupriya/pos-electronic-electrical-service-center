@@ -32,10 +32,13 @@ public class OrdersViewDaoImpl implements OrdersViewDao {
             try {
                 OrdersEntity existingEntity = session.get(OrdersEntity.class, updatedEntity.getOrderId());
                 if (existingEntity != null) {
-                    existingEntity.setOrderStatus(updatedEntity.getOrderStatus());
+
+                    if (updatedEntity.getOrderStatus() != null) {
+                        existingEntity.setOrderStatus(updatedEntity.getOrderStatus());
+                    }
 
                     if (updatedEntity.getTotal() != null) {
-                        existingEntity.setTotal(updatedEntity.getTotal());
+                        existingEntity.setTotal(updatedEntity.getTotal()+(existingEntity.getTotal()==null?0:existingEntity.getTotal()));
                     }
 
                     transaction.commit();

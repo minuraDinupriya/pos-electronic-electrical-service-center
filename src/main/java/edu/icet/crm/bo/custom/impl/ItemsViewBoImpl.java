@@ -63,7 +63,11 @@ public class ItemsViewBoImpl implements ItemsViewBo {
         System.out.println(totalItemCount);
 
         if (itemCount == totalItemCount) {
-            ordersViewDao.updateOrder(new OrdersEntity(orderId, "COMPLETED", null));
+            ordersViewDao.updateOrder(new OrdersEntity(
+                    orderId,
+                    "COMPLETED",
+                    null
+            ));
             sendEmailToCustomer(orderId);
         }
     }
@@ -133,6 +137,13 @@ public class ItemsViewBoImpl implements ItemsViewBo {
 
     @Override
     public boolean savePart(PartDto partDto){
-        return partDao.savePart(partDto);
+         if (partDao.savePart(partDto)){
+             return ordersViewDao.updateOrder(new OrdersEntity(
+                     partDto.getOrderId(),
+                     null,
+                     partDto.getPrice() * partDto.getQuantity()
+             ));
+         }
+         return false;
     }
 }

@@ -111,8 +111,8 @@ public class OrdersViewController {
 
     private void showTotalInputDialog(OrdersViewTm selectedOrder) {
         Dialog<Double> dialog = new Dialog<>();
-        dialog.setTitle("Enter Total Value");
-        dialog.setHeaderText("Enter the total value for the order:");
+        dialog.setTitle("Enter Labour Charge");
+        dialog.setHeaderText("Enter the Labour Charge for the order:");
 
         TextField totalTextField = new TextField();
         totalTextField.setPromptText("Total");
@@ -124,24 +124,26 @@ public class OrdersViewController {
                 try {
                     return Double.parseDouble(totalTextField.getText());
                 } catch (NumberFormatException e) {
-                    showAlert("Invalid Input", "Please enter a valid number for the total.");
+                    showAlert("Invalid Input", "Please enter a valid number for the labour charge.");
                 }
             }
             return null;
         });
 
-        dialog.showAndWait().ifPresent(total -> {
-            if (total != null) {
+        dialog.showAndWait().ifPresent(enteredTotal -> {
+            if (enteredTotal != null) {
+
+                double newTotal = enteredTotal + selectedOrder.getTotal();
 
                 boolean updateSuccess = ordersViewBo.updateOrder(new OrderDto(
                         selectedOrder.getOrderId(),
                         "CLOSED",
-                        total
+                        enteredTotal
                 ));
 
                 if (updateSuccess) {
                     selectedOrder.setStatus("CLOSED");
-                    selectedOrder.setTotal(total);
+                    selectedOrder.setTotal(newTotal);
                     selectedOrder.getCloseOrderButton().setDisable(true);
                     table.refresh();
                     showAlert("Total Entered", "Total for the order has been entered and saved successfully.");
@@ -157,7 +159,7 @@ public class OrdersViewController {
     void backBtnOnAction(ActionEvent event) throws IOException {
         Stage stage = (Stage) pane.getScene().getWindow();
         stage.setScene(new Scene(FXMLLoader.load(getClass().getResource("/view/EmployeeView.fxml"))));
-        ordersViewBo.getOrdersViewDto();
+//        ordersViewBo.getOrdersViewDto();
     }
 
     @FXML

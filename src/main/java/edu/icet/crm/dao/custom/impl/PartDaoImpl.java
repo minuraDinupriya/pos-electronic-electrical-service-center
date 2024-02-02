@@ -15,20 +15,16 @@ public class PartDaoImpl implements PartDao {
             Transaction transaction = session.beginTransaction();
 
             try {
-                // Retrieve the ItemsEntity for the given itemId
                 ItemsEntity itemEntity = session.get(ItemsEntity.class, partDto.getItemId());
 
-                // Create a new PartEntity based on the PartDto
                 PartEntity partEntity = new PartEntity(
                         partDto.getName(),
                         partDto.getQuantity(),
                         partDto.getPrice()
                 );
 
-                // Set the reference to the ItemsEntity
                 partEntity.setItem(itemEntity);
 
-                // Save the PartEntity
                 session.save(partEntity);
 
                 transaction.commit();
