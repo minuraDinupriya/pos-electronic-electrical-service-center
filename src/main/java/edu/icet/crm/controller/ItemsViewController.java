@@ -3,10 +3,12 @@ package edu.icet.crm.controller;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXTextField;
 import edu.icet.crm.bo.BoFactory;
 import edu.icet.crm.bo.BoType;
 import edu.icet.crm.bo.custom.ItemsViewBo;
 import edu.icet.crm.dto.ItemDto;
+import edu.icet.crm.dto.PartDto;
 import edu.icet.crm.dto.tm.ItemsViewTm;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -32,6 +34,9 @@ public class ItemsViewController {
     public TableView<ItemsViewTm> tblItems;
     public Label lblOrderID;
     public JFXComboBox comboStatus;
+    public JFXTextField txtPartName;
+    public JFXTextField txtPartPrice;
+    public JFXTextField txtPartQty;
     @FXML
     private BorderPane pane;
 
@@ -209,5 +214,14 @@ public class ItemsViewController {
 
     public void statusComboOnAction(ActionEvent actionEvent) {
 
+    }
+
+    public void addPartBtnOnAction(ActionEvent actionEvent) {
+        itemsViewBo.savePart(new PartDto(
+                lblOrderID.getText(),
+                txtPartName.getText(),
+                Integer.parseInt(txtPartQty.getText()),
+                Double.parseDouble(txtPartPrice.getText())
+        ));
     }
 }

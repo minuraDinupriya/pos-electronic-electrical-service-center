@@ -4,8 +4,10 @@ import edu.icet.crm.bo.custom.ItemsViewBo;
 import edu.icet.crm.dao.DaoFactory;
 import edu.icet.crm.dao.custom.ItemsViewDao;
 import edu.icet.crm.dao.custom.OrdersViewDao;
+import edu.icet.crm.dao.custom.PartDao;
 import edu.icet.crm.dao.util.DaoType;
 import edu.icet.crm.dto.ItemDto;
+import edu.icet.crm.dto.PartDto;
 import edu.icet.crm.entity.ItemsEntity;
 import edu.icet.crm.entity.OrdersEntity;
 
@@ -21,6 +23,7 @@ import java.util.Properties;
 public class ItemsViewBoImpl implements ItemsViewBo {
     ItemsViewDao itemsViewDao= DaoFactory.getInstance().getDao(DaoType.ITEMS_VIEW_DAO);
     OrdersViewDao ordersViewDao=DaoFactory.getInstance().getDao(DaoType.ORDERS_VIEW_DAO);
+    PartDao partDao=DaoFactory.getInstance().getDao(DaoType.PART_DAO);
 
 
     @Override
@@ -126,5 +129,10 @@ public class ItemsViewBoImpl implements ItemsViewBo {
         }
 
         return false;
+    }
+
+    @Override
+    public boolean savePart(PartDto partDto){
+        return partDao.savePart(partDto);
     }
 }
