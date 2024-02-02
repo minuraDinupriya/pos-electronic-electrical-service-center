@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface LogInViewBo extends SuperBo {
     List<UserDto> getUsers();
-    public boolean updatePassword(String email, String newPassword);
+    boolean updatePassword(String email, String newPassword);
 }

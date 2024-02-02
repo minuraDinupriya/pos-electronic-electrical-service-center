@@ -44,28 +44,18 @@ public class LogInViewDaoImpl implements LogInViewDao {
 
         return password;
     }
-
     @Override
-    public List<UserDto> getAllUsers() {
-        List<UserDto> userDtoList = new ArrayList<>();
+    public List<UsersEntity> getAllUsers() {
+        List<UsersEntity> userEntities = new ArrayList<>();
 
         try (Session session = HibernateUtil.getSession()) {
             Query<UsersEntity> query = session.createQuery("FROM UsersEntity", UsersEntity.class);
-            List<UsersEntity> userEntities = query.list();
-
-            for (UsersEntity userEntity : userEntities) {
-                UserDto userDto = new UserDto(
-                        userEntity.getUserId(),
-                        userEntity.getUserName(),
-                        userEntity.getPassword(),
-                        userEntity.getRole()
-                );
-                userDtoList.add(userDto);
-            }
+            userEntities = query.list();
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        return userDtoList;
+        return userEntities;
     }
+
 }

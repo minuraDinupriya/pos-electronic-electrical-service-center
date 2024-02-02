@@ -6,5 +6,5 @@ import edu.icet.crm.dto.OrderDto;
 import java.util.List;
 
 public interface OrderReportsViewBo extends SuperBo {
-    public List<OrderDto> getAllOrders();
+    List<OrderDto> getAllOrders();
 }

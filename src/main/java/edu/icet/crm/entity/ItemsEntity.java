@@ -3,7 +3,7 @@ package edu.icet.crm.entity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
+import java.util.List;
 import javax.persistence.*;
 
 @Setter
@@ -29,6 +29,9 @@ public class ItemsEntity {
     @ManyToOne
     @JoinColumn(name = "order_id", nullable = false)
     private OrdersEntity order;
+
+    @OneToMany(mappedBy = "item", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<PartEntity> parts;
 
     public ItemsEntity(String itemId, String name, String category, String status) {
         this.itemId = itemId;

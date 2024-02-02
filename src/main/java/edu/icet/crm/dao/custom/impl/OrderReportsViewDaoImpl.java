@@ -13,11 +13,10 @@ import java.util.List;
 
 public class OrderReportsViewDaoImpl implements OrderReportsViewDao {
     @Override
-    public List<OrderDto> getAllOrders() {
+    public List<OrdersEntity> getAllOrders() {
         try (Session session = HibernateUtil.getSession()) {
-            String hql = "SELECT new edu.icet.crm.dto.OrderDto(o.orderId, o.orderStatus, o.customer.customerId, o.orderDate, o.note) " +
-                    "FROM OrdersEntity o";
-            Query<OrderDto> query = session.createQuery(hql, OrderDto.class);
+            String hql = "FROM OrdersEntity o";
+            Query<OrdersEntity> query = session.createQuery(hql, OrdersEntity.class);
             return query.list();
         } catch (Exception e) {
             e.printStackTrace();

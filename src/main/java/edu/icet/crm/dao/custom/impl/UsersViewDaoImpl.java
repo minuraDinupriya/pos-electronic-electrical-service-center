@@ -16,27 +16,14 @@ import java.util.List;
 public class UsersViewDaoImpl implements UsersViewDao {
 
     @Override
-    public List<UserDto> getAllUsers() {
-        List<UserDto> userDtoList = new ArrayList<>();
-
+    public List<UsersEntity> getAllUsers() {
         try (Session session = HibernateUtil.getSession()) {
             Query<UsersEntity> query = session.createQuery("FROM UsersEntity", UsersEntity.class);
-            List<UsersEntity> userEntities = query.list();
-
-            for (UsersEntity userEntity : userEntities) {
-                UserDto userDto = new UserDto(
-                        userEntity.getUserId(),
-                        userEntity.getUserName(),
-                        userEntity.getPassword(),
-                        userEntity.getRole()
-                );
-                userDtoList.add(userDto);
-            }
+            return query.list();
         } catch (Exception e) {
             e.printStackTrace();
+            return null;
         }
-
-        return userDtoList;
     }
 
     @Override

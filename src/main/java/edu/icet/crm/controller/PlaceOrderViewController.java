@@ -106,7 +106,7 @@ public class PlaceOrderViewController {
             );
 
             tmList.add(placeOrderTm);
-            table.setItems(tmList  );
+            table.setItems(tmList);
 
 
             clearBtnOnAction();

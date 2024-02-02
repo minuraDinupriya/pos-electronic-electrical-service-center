@@ -5,8 +5,10 @@ import edu.icet.crm.dao.DaoFactory;
 import edu.icet.crm.dao.custom.UsersViewDao;
 import edu.icet.crm.dao.util.DaoType;
 import edu.icet.crm.dto.UserDto;
+import edu.icet.crm.entity.UsersEntity;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class UserViewBoImpl implements UserViewBo {
 
@@ -14,7 +16,15 @@ public class UserViewBoImpl implements UserViewBo {
 
     @Override
     public List<UserDto> getUsers() {
-        return usersViewDao.getAllUsers();
+        List<UsersEntity> usersEntities = usersViewDao.getAllUsers();
+        return usersEntities.stream()
+                .map(usersEntity -> new UserDto(
+                        usersEntity.getUserId(),
+                        usersEntity.getUserName(),
+                        usersEntity.getPassword(),
+                        usersEntity.getRole()
+                ))
+                .collect(Collectors.toList());
     }
 
     @Override

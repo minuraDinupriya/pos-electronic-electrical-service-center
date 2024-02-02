@@ -7,11 +7,11 @@ import edu.icet.crm.entity.ItemsEntity;
 import java.util.List;
 
 public interface ItemsViewDao extends SuperDao {
-    public List<ItemsEntity> getAllItems();
-    public boolean deleteItem(String itemId);
-    public boolean updateItemStatus(String orderId, String status);
-    public String getCustomerEmailByOrderId(String orderId);
-    public String getOrderIdByItemId(String itemId);
+    List<ItemsEntity> getAllItems();
+    boolean deleteItem(String itemId);
+    boolean updateItemStatus(String orderId, String status);
+    String getCustomerEmailByOrderId(String orderId);
+    String getOrderIdByItemId(String itemId);
     int getOrderItemCountByStatus(String orderId, String status);
     int getTotalItemCountByOrderId(String orderId);
     String getOrderDateByItemId(String itemId);
