@@ -7,6 +7,9 @@ import edu.icet.crm.bo.BoFactory;
 import edu.icet.crm.bo.BoType;
 import edu.icet.crm.bo.custom.LogInViewBo;
 import edu.icet.crm.dto.UserDto;
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -18,10 +21,13 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.scene.control.Alert;
+import javafx.util.Duration;
 
 import java.io.IOException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
@@ -33,6 +39,7 @@ public class LoginViewController {
 
     private final LogInViewBo logInViewBo = BoFactory.getInstance().getBo(BoType.LOGIN_VIEW_BO);
     public AnchorPane pane;
+    public JFXPasswordField txtPassword;
 
     @FXML
     private JFXButton btnSubmit;
@@ -40,8 +47,9 @@ public class LoginViewController {
     @FXML
     private JFXTextField txtEmail;
 
-    @FXML
-    private JFXTextField txtPassword;
+
+//    private JFXTextField txtPassword;
+
 
     @FXML
     public void btnSubmitOnAction(ActionEvent actionEvent) throws IOException {

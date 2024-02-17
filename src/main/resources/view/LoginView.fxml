@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXPasswordField?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -10,7 +11,7 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="519.0" prefWidth="706.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.icet.crm.controller.LoginViewController">
    <center>
-      <StackPane maxHeight="280.0" maxWidth="432.0" prefHeight="280.0" prefWidth="432.0" style="-fx-background-color: #fcdb03;" BorderPane.alignment="CENTER">
+      <StackPane maxHeight="280.0" maxWidth="432.0" prefHeight="280.0" prefWidth="432.0" style="-fx-background-color: #cee6f3;" BorderPane.alignment="CENTER">
          <children>
             <AnchorPane fx:id="pane" prefHeight="279.0" prefWidth="440.0">
                <children>
@@ -20,9 +21,9 @@
                      </font>
                   </Label>
                   <JFXTextField fx:id="txtEmail" layoutX="46.0" layoutY="90.0" prefHeight="31.0" prefWidth="338.0" promptText="username (email address)" />
-                  <JFXTextField fx:id="txtPassword" layoutX="46.0" layoutY="149.0" prefHeight="31.0" prefWidth="340.0" promptText="password" />
                   <JFXButton layoutX="153.0" layoutY="225.0" onAction="#btnSubmitOnAction" prefHeight="31.0" prefWidth="147.0" style="-fx-background-color: #00008B;" text="Submit" textFill="WHITE" />
                   <JFXButton layoutX="226.0" layoutY="180.0" onAction="#forgottenPasswordBtnOnAction" prefHeight="31.0" prefWidth="171.0" text="forgotten password?" textFill="DARKBLUE" />
+                  <JFXPasswordField fx:id="txtPassword" layoutX="46.0" layoutY="140.0" prefHeight="31.0" prefWidth="340.0" promptText="password" />
                </children>
             </AnchorPane>
          </children>

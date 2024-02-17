@@ -22,8 +22,11 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import javafx.util.converter.NumberStringConverter;
+import net.sf.jasperreports.engine.*;
+import net.sf.jasperreports.view.JasperViewer;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 
 public class OrdersViewController {
@@ -132,7 +135,6 @@ public class OrdersViewController {
 
         dialog.showAndWait().ifPresent(enteredTotal -> {
             if (enteredTotal != null) {
-
                 double newTotal = enteredTotal + selectedOrder.getTotal();
 
                 boolean updateSuccess = ordersViewBo.updateOrder(new OrderDto(
@@ -147,6 +149,25 @@ public class OrdersViewController {
                     selectedOrder.getCloseOrderButton().setDisable(true);
                     table.refresh();
                     showAlert("Total Entered", "Total for the order has been entered and saved successfully.");
+
+                    // Display the bill report
+                    try {
+                        // Load JRXML file
+                        JasperReport jasperReport = JasperCompileManager.compileReport(getClass().getResourceAsStream("/reports/bill.jrxml"));
+
+                        // Create parameters
+                        HashMap<String, Object> parameters = new HashMap<>();
+//                        parameters.put("OrderID", selectedOrder.getOrderId()); // Pass order ID as a parameter
+
+                        // Create JasperPrint object
+                        JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, new JREmptyDataSource());
+
+                        // View the report in JasperViewer
+                        JasperViewer.viewReport(jasperPrint, false);
+                    } catch (JRException ex) {
+                        ex.printStackTrace();
+                        showAlert("Error", "Failed to load and display bill report.");
+                    }
                 } else {
                     showAlert("Update Failed", "Failed to update total for the order.");
                 }
